@@ -1,0 +1,13 @@
+{
+    "title": "TradeLayer Documentation",
+    "description": "Comprehensive guide to TradeLayer Protocol.",
+    "author": "Your Name",
+    "plugins": ["-lunr", "-search", "search-pro"],
+    "pluginsConfig": {
+      "search-pro": {
+        "cutWordLib": "nodejieba",
+        "defineWord": []
+      }
+    }
+  }
+  
