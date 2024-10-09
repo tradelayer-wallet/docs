@@ -1,0 +1,112 @@
+/* Base styles for body and headings */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #1a73e8;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    font-size: 1.75em;
+    margin-bottom: 0.5em;
+}
+
+/* Link styles */
+a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Styling for sidebar */
+.book-summary {
+    background-color: #f8f9fa;
+    padding: 1em;
+    border-right: 1px solid #ddd;
+}
+
+.book-summary ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.book-summary a {
+    color: #333;
+}
+
+.book-summary a:hover {
+    color: #1a73e8;
+}
+
+/* Styling for code blocks */
+pre {
+    background-color: #f1f1f1;
+    padding: 1em;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+code {
+    background-color: #f4f4f4;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+/* Pagination styles */
+.pagination .next a,
+.pagination .previous a {
+    color: #1a73e8;
+}
+
+.pagination .next a:hover,
+.pagination .previous a:hover {
+    text-decoration: underline;
+}
+
+/* Table of contents */
+.summary .chapter-title {
+    font-weight: bold;
+}
+
+/* Custom styles for alerts */
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}

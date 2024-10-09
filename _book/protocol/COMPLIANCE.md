@@ -1,5 +1,5 @@
 
-### Compliance
+# Compliance
 
 TradeLayer has a whitelist feature built-in, taking up a few tx types, for creating new whitelists and issuing/revoking attestations from that admin address.Like oracles and token issuer addresses, there’s a back-up address parameter and an update admin transaction type to refresh multisig security protocols, update to quantum-resistant addresses when those come out, and so on.The protocol uses two lists to verify who qualifies for delux rebates in the early stages of the protocol launch and which centralized oracles and tokens qualify to be included in cumulative LTC-equivalent volume for vesting and rebates.
 
