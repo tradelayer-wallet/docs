@@ -85,6 +85,24 @@ code {
     font-weight: bold;
 }
 
+.book-header {
+    background-color: #1a73e8;
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.book-header .title {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+.book-header .logo {
+    height: 50px;
+    margin-right: 10px;
+}
+
+
 /* Custom styles for alerts */
 .alert {
     padding: 10px;

@@ -1,0 +1,902 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>TradeLayer Transactions · TradeLayer Documentation</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Patrick Dugan">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tabs/bootstrap.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/custom.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="API.html" />
+    
+    
+    <link rel="prev" href="../protocol/COMPLIANCE.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Introduction</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../introduction/OVERVIEW.html">
+            
+                <a href="../introduction/OVERVIEW.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../introduction/VISION.html">
+            
+                <a href="../introduction/VISION.html">
+            
+                    
+                    Vision
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../introduction/CROSSCHAIN.html">
+            
+                <a href="../introduction/CROSSCHAIN.html">
+            
+                    
+                    Cross-Chain
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Protocol</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../protocol/OP_RETURN_LAYER.html">
+            
+                <a href="../protocol/OP_RETURN_LAYER.html">
+            
+                    
+                    OP_Return Layer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../protocol/TRADE_TYPES.html">
+            
+                <a href="../protocol/TRADE_TYPES.html">
+            
+                    
+                    Trade Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../protocol/LAYER_2.html">
+            
+                <a href="../protocol/LAYER_2.html">
+            
+                    
+                    Layer 2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../protocol/DERIVATIVES.html">
+            
+                <a href="../protocol/DERIVATIVES.html">
+            
+                    
+                    Derivatives
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../protocol/INSURANCE.html">
+            
+                <a href="../protocol/INSURANCE.html">
+            
+                    
+                    Insurance and Liquidation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../protocol/FEE.html">
+            
+                <a href="../protocol/FEE.html">
+            
+                    
+                    Fees
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="../protocol/TOKENOMICS.html">
+            
+                <a href="../protocol/TOKENOMICS.html">
+            
+                    
+                    Vesting and Tokenomics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="../protocol/MACRO.html">
+            
+                <a href="../protocol/MACRO.html">
+            
+                    
+                    Macro-economics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="../protocol/COMPLIANCE.html">
+            
+                <a href="../protocol/COMPLIANCE.html">
+            
+                    
+                    Compliance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">API Reference</li>
+        
+        
+    
+        <li class="chapter active" data-level="3.1" data-path="TRANSACTIONS.html">
+            
+                <a href="TRANSACTIONS.html">
+            
+                    
+                    TradeLayer Transactions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="API.html">
+            
+                <a href="API.html">
+            
+                    
+                    Orderbook Service API Package
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="WALLET.html">
+            
+                <a href="WALLET.html">
+            
+                    
+                    Wallet Integration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="ENDPOINTS.html">
+            
+                <a href="ENDPOINTS.html">
+            
+                    
+                    TradeLayer Endpoints
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >TradeLayer Transactions</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="transaction-types">Transaction Types</h3>
+<h3 id="activation">Activation</h3>
+<ul>
+<li><p><strong>Description</strong>: Sets up and activates various functionalities within the TradeLayer ecosystem.There are multiple activations, each enabling a specific set of transactions. Once the finite activations are expended this transaction loses all power.</p>
+</li>
+<li><p><strong>Parameters</strong>: </p>
+</li>
+<li><code>txTypeToActivate</code>: The transaction type to be activated.</li>
+<li><code>block</code>: The block at which the activation takes place.</li>
+</ul>
+<hr>
+<h3 id="send">Send</h3>
+<ul>
+<li><strong>Description</strong>: Allows users to send tokens from one address to another.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>sendAll</code>: Boolean indicating if all tokens should be sent.</li>
+<li><code>senderAddress</code>: The address initiating the transaction.</li>
+<li><code>recipientAddresses</code>: Array of recipient addresses.</li>
+<li><code>propertyIds</code>: Array of token property IDs to be sent.</li>
+<li><code>amounts</code>: Array of amounts to be sent for each property.</li>
+<li><code>block</code>: The block in which the transaction occurs.
+--- ### Token Issue </li>
+<li><strong>Description</strong>: Issues a new token, which can be managed, fixed, or non-fungible.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>sender</code>: The address of the token issuer.</li>
+<li><code>initialAmount</code>: The total amount of the token at issuance.</li>
+<li><code>ticker</code>: The symbol of the token.</li>
+<li><code>url</code>: URL related to the token (optional).</li>
+<li><code>whitelistId</code>: The whitelist ID associated with the token.</li>
+<li><code>isManaged</code>: Boolean indicating if the token is managed.</li>
+<li><code>backupAddress</code>: An alternate address for token management.</li>
+<li><code>isNFT</code>: Boolean indicating if the token is non-fungible.</li>
+<li><code>block</code>: The block in which the transaction occurs.</li>
+</ul>
+<hr>
+<h3 id="trade-token-for-utxo">Trade Token for UTXO</h3>
+<ul>
+<li><strong>Description</strong>: Facilitates trading of a token in exchange for UTXOs.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>senderAddress</code>: The address sending the token.</li>
+<li><code>satsPaymentAddress</code>: The address receiving the Litecoin.</li>
+<li><code>propertyId</code>: The ID of the token being traded.</li>
+<li><code>amount</code>: The amount of tokens to be traded.</li>
+<li><code>columnA</code>: Boolean indicating which column is involved in the trade.</li>
+<li><code>satsExpected</code>: The expected amount in satoshis.</li>
+<li><code>tokenDeliveryAddress</code>: The address receiving the tokens.</li>
+<li><code>satsReceived</code>: The actual amount received in satoshis.</li>
+<li><code>price</code>: Price per token.</li>
+<li><code>paymentPercent</code>: The percentage of the payment.</li>
+<li><code>block</code>: The block number of the transaction.</li>
+<li><code>txid</code>: Transaction ID for reference.</li>
+</ul>
+<hr>
+<h3 id="commit-token">Commit Token</h3>
+<ul>
+<li><strong>Description</strong>: Commits tokens to a specific purpose, such as creating a reserve.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>senderAddress</code>: The address committing the tokens.</li>
+<li><code>channelAddress</code>: The address of the channel where tokens are committed.</li>
+<li><code>propertyId</code>: The ID of the property/token being committed.</li>
+<li><code>amount</code>: The amount being committed.</li>
+</ul>
+<hr>
+<h3 id="on-chain-token-to-token-trade">On-Chain Token-to-Token Trade</h3>
+<ul>
+<li><strong>Description</strong>: Executes a token-to-token trade directly on-chain.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>fromAddress</code>: The address initiating the trade.</li>
+<li><code>offeredPropertyId</code>: The property ID being offered.</li>
+<li><code>desiredPropertyId</code>: The property ID desired in exchange.</li>
+<li><code>amountOffered</code>: The amount of the offered property.</li>
+<li><code>amountExpected</code>: The amount expected in return.</li>
+<li><code>stop</code>: Boolean indicating if this is a stop order.</li>
+<li><code>post</code>: Boolean indicating if this is a post-only order.</li>
+</ul>
+<hr>
+<h3 id="cancel-order">Cancel Order</h3>
+<ul>
+<li><strong>Description</strong>: Cancels an existing order in the order book.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>fromAddress</code>: The address requesting the cancellation.</li>
+<li><code>isContract</code>: Boolean indicating if the order is for a contract.</li>
+<li><code>offeredPropertyId</code>: The offered property ID.</li>
+<li><code>desiredPropertyId</code>: The desired property ID.</li>
+<li><code>cancelAll</code>: Boolean indicating if all orders should be canceled.</li>
+<li><code>cancelParams</code>: Parameters for specific order cancellation.</li>
+</ul>
+<hr>
+<h3 id="create-clear-list">Create Clear List</h3>
+<ul>
+<li><strong>Description</strong>: Creates a new clear list with specific criteria.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>adminAddress</code>: The address of the admin managing the clear list.</li>
+<li><code>name</code>: The name of the clear list.- <code>url</code>: URL associated with the clear list.</li>
+<li><code>description</code>: Description of the clear list.</li>
+<li><code>backupAddress</code>: Backup admin address.</li>
+</ul>
+<hr>
+<h3 id="update-admin">Update Admin</h3>
+<ul>
+<li><strong>Description</strong>: Updates the admin address for tokens, oracles, or other entities.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>whitelist</code>: Boolean for updating a whitelist admin.</li>
+<li><code>token</code>: Boolean for updating a token admin.</li>
+<li><code>oracle</code>: Boolean for updating an oracle admin.</li>
+<li><code>id</code>: The ID of the entity to update.</li>
+<li><code>newAddress</code>: The new admin address.</li>
+<li><code>updateBackup</code>: Boolean indicating if the backup admin should also be updated.</li>
+</ul>
+<hr>
+<h3 id="issue-or-revoke-attestation">Issue or Revoke Attestation</h3>
+<ul>
+<li><strong>Description</strong>: Issues or revokes an attestation for an address.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>clearlistId</code>: The clear list ID.</li>
+<li><code>targetAddress</code>: The address for the attestation.</li>
+<li><code>clearlistRegistry</code>: The clear list registry.</li>
+<li><code>metaData</code>: Metadata for the attestation.</li>
+<li><code>revoke</code>: Boolean indicating if this is a revocation.</li>
+</ul>
+<hr>
+<h3 id="amm-pool--">AMM Pool -</h3>
+<p><strong>Description</strong>: Handles AMM (Automated Market Maker) pool actions like adding or redeeming capital.</p>
+<ul>
+<li><strong>Parameters</strong>: </li>
+<li><code>sender</code>: The sender&apos;s address.</li>
+<li><code>block</code>: The block number.</li>
+<li><code>isRedeem</code>: Boolean indicating if it&apos;s a redeem action.</li>
+<li><code>isContract</code>: Boolean indicating if the transaction involves a contract.</li>
+<li><code>id</code>: ID of the property or contract involved.</li>
+<li><code>amount</code>: Amount for the transaction.</li>
+<li><code>id2</code>: Secondary ID for pairs (optional).</li>
+<li><code>amount2</code>: Secondary amount (optional).</li>
+</ul>
+<hr>
+<h3 id="grant-managed-token">Grant Managed Token</h3>
+<ul>
+<li><strong>Description</strong>: Grants managed tokens to a recipient.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>propertyId</code>: ID of the token property.</li>
+<li><code>amount</code>: The amount to grant.</li>
+<li><code>recipientAddress</code>: The recipient&apos;s address.</li>
+<li><code>propertyManager</code>: The property manager instance.</li>
+</ul>
+<hr>
+<h3 id="redeem-managed-token">Redeem Managed Token</h3>
+<ul>
+<li><strong>Description</strong>: Redeems managed tokens from an address.</li>
+<li><strong>Parameters</strong>: - <code>propertyId</code>: The property ID.</li>
+<li><code>amount</code>: Amount to redeem.</li>
+<li><code>address</code>: The address initiating the redemption.</li>
+</ul>
+<hr>
+<h3 id="create-oracle">Create Oracle</h3>
+<ul>
+<li><strong>Description</strong>: Creates a new oracle with specific parameters.</li>
+<li><strong>Parameters</strong>: </li>
+<li><code>adminAddress</code>: Admin address for the oracle.</li>
+<li><code>ticker</code>: Ticker symbol for the oracle.- <code>url</code>: URL for the oracle.</li>
+<li><code>backupAddress</code>: Backup admin address.</li>
+<li><code>clearlists</code>: Clearlists associated with the oracle.</li>
+<li><code>lag</code>: Oracle data lag time.</li>
+<li><code>oracleRegistry</code>: Registry for oracles.</li>
+</ul>
+<hr>
+<h3 id="publish-oracle-data">Publish Oracle Data</h3>
+<ul>
+<li><strong>Description</strong>: Publishes data to an existing oracle.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>oracleId</code>: The ID of the oracle to publish data to.</li>
+<li><code>price</code>: The price data to publish.</li>
+<li><code>high</code>: The high value for the data period.</li>
+<li><code>low</code>: The low value for the data period.</li>
+<li><code>close</code>: The close value for the data period.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="close-oracle">Close Oracle</h3>
+<ul>
+<li><strong>Description</strong>: Closes an existing oracle, stopping further data publishing.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>oracleId</code>: The ID of the oracle to close.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="create-contract-series">Create Contract Series</h3>
+<ul>
+<li><strong>Description</strong>: Creates a new futures contract series with parameters like leverage, collateral, and expiry.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>sender</code>: Address creating the series.</li>
+<li><code>native</code>: Boolean indicating if the contract is native.</li>
+<li><code>underlyingOracleId</code>: The ID of the underlying oracle for the contract.</li>
+<li><code>onChainData</code>: Data required for on-chain execution.</li>
+<li><code>notionalPropertyId</code>: Property ID for notional value.</li>
+<li><code>notionalValue</code>: The value for notional amount.</li>
+<li><code>collateralPropertyId</code>: Collateral property ID.</li>
+<li><code>leverage</code>: Leverage factor for the contract.</li>
+<li><code>expiryPeriod</code>: Expiry period of the contract.</li>
+<li><code>series</code>: Series identifier.</li>
+<li><code>inverse</code>: Boolean indicating if the contract is inverse.</li>
+<li><code>fee</code>: The transaction fee for the series.</li>
+<li><code>block</code>: The block when the series is created.</li>
+<li><code>whitelist</code>: Whitelist associated with the series.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="exercise-derivative">Exercise Derivative</h3>
+<ul>
+<li><strong>Description</strong>: Exercises an existing derivative contract.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>contractId</code>: The ID of the contract to exercise.</li>
+<li><code>amount</code>: The amount to exercise.</li>
+<li><code>contractsRegistry</code>: Registry instance for contracts.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="trade-contract-on-chain">Trade Contract On-Chain</h3>
+<ul>
+<li><strong>Description</strong>: Executes an on-chain trade for a futures contract.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>contractId</code>: The ID of the contract being traded.</li>
+<li><code>price</code>: The price for the contract.</li>
+<li><code>amount</code>: The amount of the contract.</li>
+<li><code>sell</code>: Boolean indicating if the trade is a sell order.</li>
+<li><code>insurance</code>: Insurance details for the trade.</li>
+<li><code>blockTime</code>: Block timestamp.</li>
+<li><code>txid</code>: Transaction ID.</li>
+<li><code>sender</code>: Address executing the trade.</li>
+<li><code>reduce</code>: Boolean indicating if this is a reduce-only order.</li>
+<li><code>post</code>: Boolean indicating if this is a post-only order.</li>
+<li><code>stop</code>: Boolean indicating if this is a stop order.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="trade-contract-channel">Trade Contract Channel</h3>
+<ul>
+<li><strong>Description</strong>: Executes a trade for a contract within a specified channel.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>contractId</code>: The ID of the contract being traded.</li>
+<li><code>price</code>: The price at which the contract is traded.</li>
+<li><code>amount</code>: The amount being traded.</li>
+<li><code>columnAIsSeller</code>: Boolean indicating if Column A is the seller.</li>
+<li><code>expiryBlock</code>: Expiry block for the contract.</li>
+<li><code>insurance</code>: Insurance details for the contract.</li>
+<li><code>channelAddress</code>: Address of the trading channel.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="trade-tokens-channel">Trade Tokens Channel</h3>
+<ul>
+<li><strong>Description</strong>: Facilitates token-to-token trade within a specific channel.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>offeredPropertyId</code>: The ID of the token being offered.</li>
+<li><code>desiredPropertyId</code>: The ID of the token being requested.</li>
+<li><code>amountOffered</code>: Amount of the offered token.</li>
+<li><code>amountDesired</code>: Amount of the desired token.</li>
+<li><code>expiryBlock</code>: Expiry block for the trade.</li>
+<li><code>columnAIsOfferer</code>: Boolean indicating if Column A is the offerer.</li>
+<li><code>channelAddress</code>: The address of the trading channel.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="withdrawal">Withdrawal</h3>
+<ul>
+<li><strong>Description</strong>: Withdraws a specified amount of tokens from a channel.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>withdrawAll</code>: Boolean indicating if all tokens should be withdrawn.</li>
+<li><code>channelAddress</code>: Address of the channel.</li>
+<li><code>propertyId</code>: The property ID for the tokens being withdrawn.</li>
+<li><code>amount</code>: The amount to withdraw.</li>
+<li><code>sender</code>: The address initiating the withdrawal.</li>
+<li><code>block</code>: The block number when the withdrawal occurs.</li>
+<li><code>columnIsB</code>: Boolean indicating if Column B is involved in the withdrawal.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="transfer">Transfer</h3>
+<ul>
+<li><strong>Description</strong>: Transfers tokens from one channel to another.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>fromChannelAddress</code>: The channel address initiating the transfer.</li>
+<li><code>toChannelAddress</code>: The destination channel address.</li>
+<li><code>propertyId</code>: The ID of the property being transferred.</li>
+<li><code>amount</code>: The amount to transfer.</li>
+<li><code>isColumnA</code>: Boolean indicating if Column A is the source column.</li>
+<li><code>block</code>: The block number when the transfer occurs.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="settle-channel-pnl">Settle Channel PNL</h3>
+<ul>
+<li><strong>Description</strong>: Settles profit and loss for a specific trading channel.</li>
+<li><strong>Parameters</strong>:<ul>
+<li>propertyId</li>
+<li>amount</li>
+<li>keepingTrade (boolean)</li>
+<li>txId negated (base 94 encoded)</li>
+<li>txId negated (if keepingTrade is false)</li>
+<li>mark price (if keepingTrade is true)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="mint-synthetic">Mint Synthetic</h3>
+<ul>
+<li><strong>Description</strong>: Mints new synthetic tokens based on an existing property and contract.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>address</code>: Address to receive the synthetic tokens.</li>
+<li><code>propertyId</code>: The collateral property ID.</li>
+<li><code>contractId</code>: The contract ID.</li>
+<li><code>amount</code>: Amount of synthetic tokens to mint.</li>
+<li><code>grossRequired</code>: Gross amount required as collateral.</li>
+<li><code>contracts</code>: Number of contracts.</li>
+<li><code>margin</code>: Margin required for the transaction.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="redeem-synthetic">Redeem Synthetic</h3>
+<ul>
+<li><strong>Description</strong>: Redeems synthetic tokens for the underlying collateral.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>address</code>: Address initiating the redemption.</li>
+<li><code>propertyId</code>: The ID of the synthetic token.</li>
+<li><code>contractId</code>: The associated contract ID.</li>
+<li><code>amount</code>: The amount to redeem.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="pay-to-tokens">Pay To Tokens</h3>
+<ul>
+<li><strong>Description</strong>: Distributes one type of token to holders of another.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>propertyIdTarget</code>: ID of the target property.</li>
+<li><code>propertyIdUsed</code>: ID of the property used for payment.</li>
+<li><code>amount</code>: The total amount for distribution.</li>
+<li><code>address</code>: Address initiating the distribution.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="create-option-chain">Create Option Chain</h3>
+<ul>
+<li><strong>Description</strong>: Creates an options chain with specified strike intervals and style.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>seriesId</code>: ID of the options series.</li>
+<li><code>strikePercentInterval</code>: Interval for strike prices.</li>
+<li><code>expiryNumber</code>: number of contracts in the series</li>
+<li><code>expiryInterval</code>: blocks between expirations for contracts in the series</li>
+<li><code>isEuropeanStyle</code>: Boolean indicating if the options are European style.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="trade-bai-urbun">Trade Bai Urbun</h3>
+<ul>
+<li><strong>Description</strong>: Facilitates an Islamic Bai Urbun trade within a channel.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>channelAddress</code>: Address of the trading channel.</li>
+<li><code>propertyIdDownPayment</code>: Property ID for the down payment.</li>
+<li><code>propertyIdToBeSold</code>: Property ID for the item to be sold.</li>
+<li><code>downPaymentPercent</code>: Down payment percentage.</li>
+<li><code>amount</code>: Total amount for the trade.</li>
+<li><code>expiryBlock</code>: Expiry block for the trade.</li>
+<li><code>tradeExpiryBlock</code>: Trade expiry block.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="trade-murabaha">Trade Murabaha</h3>
+<ul>
+<li><strong>Description</strong>: Executes a Murabaha trade where the cost and profit margin are predefined.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>channelAddress</code>: Address of the trading channel.</li>
+<li><code>buyerAddress</code>: Address of the buyer.</li>
+<li><code>sellerAddress</code>: Address of the seller.</li>
+<li><code>propertyId</code>: Property ID for the trade.</li>
+<li><code>costPrice</code>: Cost price for the goods.</li>
+<li><code>profitMargin</code>: Profit margin for the seller.</li>
+<li><code>paymentBlockHeight</code>: Block height for payment.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="issue-invoice">Issue Invoice</h3>
+<ul>
+<li><strong>Description</strong>: Issues an invoice for a specified amount and due date.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>propertyManager</code>: The property manager instance.</li>
+<li><code>invoiceRegistry</code>: Registry instance for invoices.</li>
+<li><code>propertyIdToReceivePayment</code>: Property ID to receive payment.</li>
+<li><code>amount</code>: Amount for the invoice.</li>
+<li><code>dueDateBlock</code>: Due date block.</li>
+<li><code>propertyIdCollateral</code>: Collateral property ID (optional).</li>
+<li><code>receivesPayToToken</code>: Boolean for pay-to-token collateral.</li>
+<li><code>issuerNonce</code>: Nonce for the issuer.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="batch-move-zk-rollup">Batch Move ZK Rollup</h3>
+<ul>
+<li><strong>Description</strong>: Processes a batch of transactions using zero-knowledge rollups.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>zkVerifier</code>: Verifier for zero-knowledge proofs.</li>
+<li><code>rollupData</code>: Data for the rollup batch.</li>
+<li><code>zkProof</code>: Zero-knowledge proof for the rollup batch.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="publish-new-tx">Publish New Tx</h3>
+<ul>
+<li><strong>Description</strong>: Publishes a new transaction type with accompanying code.</li>
+<li><strong>Parameters</strong>:<ul>
+<li><code>ordinalRevealJSON</code>: JSON data for the ordinal reveal.</li>
+<li><code>jsCode</code>: JavaScript code associated with the transaction.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="bind-smart-contract">Bind Smart Contract</h3>
+<ul>
+<li><strong>Description</strong>: Tags the sender address as having keys controlled by </li>
+<li><strong>Parameters</strong>: <ul>
+<li><code>contractHash</code>: identifier for the contract address on the foreign chain</li>
+<li><code>controlledKeys</code>: number of keys on the address controlled by the contract</li>
+<li><code>thresholdKeys</code>: number of signatures needed to sign a tx from this address (if multisig)</li>
+<li><code>maximumKeys</code>: maximum number of keys on the address (if multisig)</li>
+<li><code>ordinalRevealCode</code>: Code for the contract can be found in the witness data </li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="register-and-redeem-opctv-covenant">Register and Redeem OP_CTV Covenant</h3>
+<ul>
+<li><strong>Description</strong>: Registers or redeems an OP_CTV Covenant transaction.</li>
+<li><strong>Parameters</strong>: To be defined based on specific use case requirements.</li>
+</ul>
+<hr>
+<h3 id="mint-colored-coin">Mint Colored Coin</h3>
+<ul>
+<li><strong>Description</strong>: Mints a new colored coin with specific properties.</li>
+<li><strong>Parameters</strong>: To be defined based on specific use case requirements.</li>
+</ul>
+<hr>
+<p><em>Last updated: [10<em>8</em>2024]</em></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../protocol/COMPLIANCE.html" class="navigation navigation-prev " aria-label="Previous page: Compliance">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="API.html" class="navigation navigation-next " aria-label="Next page: Orderbook Service API Package">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"TradeLayer Transactions","level":"3.1","depth":1,"next":{"title":"Orderbook Service API Package","level":"3.2","depth":1,"path":"api_reference/API.md","ref":"api_reference/API.md","articles":[]},"previous":{"title":"Compliance","level":"2.9","depth":1,"path":"protocol/COMPLIANCE.md","ref":"protocol/COMPLIANCE.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","tabs","highlight","sharing","fontsettings","theme-default"],"styles":{"website":"styles/custom.css"},"pluginsConfig":{"search-pro":{"cutWordLib":"nodejieba","defineWord":[]},"tabs":{},"highlight":{},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Patrick Dugan","engines":{"gitbook":"3.2.3"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TradeLayer Documentation","gitbook":"*","description":"Comprehensive guide to TradeLayer Protocol."},"file":{"path":"api_reference/TRANSACTIONS.md","mtime":"2024-10-09T14:05:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-10-10T17:52:59.987Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-tabs/bootstrap.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
