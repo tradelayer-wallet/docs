@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Vesting and Tokenomics · TradeLayer Documentation</title>
+        <title>Derivatives · TradeLayer Documentation</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -53,10 +53,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="MACRO.html" />
+    <link rel="next" href="INSURANCE.html" />
     
     
-    <link rel="prev" href="FEE.html" />
+    <link rel="prev" href="LAYER_2.html" />
     
 
     </head>
@@ -185,7 +185,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.4" data-path="DERIVATIVES.html">
+        <li class="chapter active" data-level="2.4" data-path="DERIVATIVES.html">
             
                 <a href="DERIVATIVES.html">
             
@@ -224,7 +224,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.7" data-path="TOKENOMICS.html">
+        <li class="chapter " data-level="2.7" data-path="TOKENOMICS.html">
             
                 <a href="TOKENOMICS.html">
             
@@ -352,7 +352,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Vesting and Tokenomics</a>
+        <a href=".." >Derivatives</a>
     </h1>
 </div>
 
@@ -367,42 +367,22 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h3 id="vesting-tokens">Vesting Tokens</h3>
-<h2 id="tl-and-tlvest">TL and TLVEST</h2>
-
-<img src="piechart.png" alt="Token Allocation Pie Chart" style="width: 100%; max-width: 600px;">
-
-
-<p>
-50,000 TL will be sold initially to get liquidity going.
-
-50,000 TL will be used to mint synthetic LTC against the Native TL/LTC Perpetual Swap settling off of the liquidity of the above 50k.
-
-150,000 TL will be auto-deposited on initialization of the protocol to the insurance fund for the TL/LTC perpetual swap. 
-
-This insurance fund accumulates buybacks with half of the fee revenue.
-
-250,000 TL are reserved in Vesting Tokens that will be 50% vested when the cumulative spot volume of the protocol is around 500 million LTC
-100% will be vested when the cumulative LTC spot volume reaches 1 billion LTC.
-
-Different ratios will apply to $TB and $TD on Bitcoin and Dogecoin. 
-
-The Doge tokenomics will be more inflationary and the BTC tokenomics will be focused on a fair launch with no initial liquid supply.</p>
-<h2 id="tli-and-tlivest">TLI and TLIVEST</h2>
-<h2 id="farming-and-airdrops">Farming and Airdrops</h2>
-<p>It&#x2019;s important that a DEx protocol has a reward for traders who make the DEx liquid and useful with their participation, especially in the early days of going from 0 liquidity to 1 liquidity.Like Homer Simpson said, I have 3 kids and 0 money, I wish I had 0 kids and 3 money.The early market makers who enable a DEx to have 3 money are very valuable and deserve a stake in the success of the DEx for that participation, but also this idea has been played out since DeFi summer 2020 to the effect usually of extreme token inflation, perp markets that price in huge negative funding for the dividend effect, unsophisticated retail buyers who can&#x2019;t price in all these variables, and eventually a massive dumping of the token as cynical farmers insta-stell their earned tokens.</p>
-<p>After a cycle of that showed us a series of charts with massive spiked to multi-billion dollar valuations (fully diluted) followed by massive dilution and 98% drawdowns, followed by maybe 300% pumps, this market cycle has given us the <strong>airdrop event</strong>.This builds FOMO in users who come try out the new pre-token product, producing a lot of numbers such as volume or Total Value Locked that seem like real traction, and then the <strong>event</strong> happens, people often isnta-sell and move on to the next anticipated airdrop.Sometimes the token pumps for a 2-5x afterwards but since they debut at something like 1B FDV the real revenue of the product, maybe an impressive &gt;10M a year, can&#x2019;t justify those valuations and the same result happens.</p>
-<h2 id="rebate-programs">Rebate Programs</h2>
-<p>Some DExes that are fee competitive and reasonably fast have offered tokens that yield to trades based on measured programs, rather than a built-in perpetual algorithm, and these distribute much or all of the revenue of the DEx to holders and/or stakers, but the dilution causes quick dumping as traders try to recover a fraction of their monthly trading fee expenditure.The result is a market cap that goes mostly sideways while the token price sags.</p>
-<p>This last incarnation isn&#x2019;t so bad, the yield from the revenues off-sets the price drops and eventually the dilution slows down and the thing bottoms, and then the combined price recovery and yield makes it an attractive hold.Meanwhile it has the effect of subsidizing trade activity in part.One problem is that the managed promotional periods are not predictable for users and involve the centralized administration of what seems to be a common enterprise, a truly decentralized protocol should replace that with a more elegant mathematical formula that anyone can predict and anticipate both the dilution and the effect at-the-market discount to fees that the token rebate represents.</p>
-<h2 id="long-term-vesting">Long-term Vesting</h2>
-<p>Now a wrinkle: what if people can&#x2019;t easily dump the rebate? You make the rebate a Vesting Token that involves a future expectation.This offsets the immediate dilution, people can try to OTC sell their VTs at a discount of they&#x2019;re major MMs and hold size, or broker an OTC buy and reach out to scoop lots of modest positions from medium-sized traders, but then flipping those still involves a long-term expectation of revenue growth or at least stability.This market effect offsets the immediacy of selling and encourages collection of the income interests in stronger hands.</p>
-<p>Therefore our approach is to rebate trades on two levels: one based on whitelisting for the early program to create Sybil resistance, wash traders will be revoked.This rebate will be higher than the fee rate in terms of expected current market value.The baseline rebate will be initially equal to the fee and decline logarithmically as the cumulative volume on the DEx increases through orders of magnitude in LTC equivalent, eventually resting at about 10% of the fee rate after years of scale volume.This makes wash trading still expensive and is economically Sybil resistant.</p>
-<p>The TLIVEST tokens will vest on a logarithmic scale from 10M LTC cumulative volume to 1T LTC cumulative volume, unlike the TLVEST tokens that are linear up to 100M LTC, 20% of the TLIVEST tokens will vest by 100M LTC, another 20% by 1B, another 20% by 10B, then another 20% by 100B and the last 20% approaching 1T.The rebates will come pre-vested proportionate to the total historical volume of the DEx at these times.</p>
-<h2 id="why-two-tokens">Why two tokens?</h2>
-<p>While it adds some confusion and dilutes brand value, the choice of decoupling native collateral from trade incentives is necessary to make the collateral backing deflationary while enabling calibrated inflation for the dilutive incentives.It&#x2019;s like how central banks hold gold and issue liabilities, one is there to keep the system stable in emergencies and keep the central bank operational, the other is there to juice the growth of the economy and earn out over time.</p>
-<p>Having the native coin be the core collateral for synthetic currency that is meant to reduce-risk and be useful collateral in ways that UTXO money cannot currently serve.If an exchange&#x2019;s deposits are all risky liabilities backed by the discounted cashflows of the exchange, like say FTX when their books were based on FTT margin and internal loans to their captive hedge fund, there&#x2019;s a horrible correlation between the decline in those liabilities market value and the decline in the expected future cashflows of the venue.In other words, scheme make crash worse, kill everything, super bad.Another terrifying example of this was the LUNA/UST model.TradeLayer&#x2019;s design has gone through iterations since 2017 and learned the lessons from the deca-billion sized failures of the past.</p>
-<p>More on this in the next article.</p>
+                                <h1 id="derivatives">Derivatives</h1>
+<p>The default derivative is a perpetual swap, which is the base of what the protocol calls a <em>Contract Series</em>, each new contract series gets a contractId which corresponds to the perpetual.</p>
+<h2 id="futures">Futures</h2>
+<p>Based on the parameters of the series, there is a block interval N where a number of futures contracts Y will be settling, the bigger Y is the more N*Y intervals in the future there exist live futures contracts.A reasonable value for N is the number of Litecoin blocks in a week (4032) or month (17280), but since a month is uneven (leaving 5 days off the year and thus slipping over the years) it&#x2019;s also recommendable to choose 52560 for a quarterly futures contract.Once a futures contract expires a new futures contract is generated.The contractId for futures starts with the Id of the parent perpetual swap, followed by a hyphen, followed by the blockheight of its expiry.</p>
+<h2 id="perpetual-funding">Perpetual Funding</h2>
+<p>There is no built-in interest rate in the funding formula for futures, there is a clamp where +/- 5 bps is ignored and given a 0 funding rate.Any average contract VWAP above the average oracle value or underlying token index will produce a funding rate of that difference minus the 5 bps clamp, and likewise an average VWAP that is discounted more than 5 bps will produce negative funding equal to the discount plus 5 bps.Funding settles hourly, which creates lots of arbitrage opportunities against other contracts.Additionally, the clamp makes it easier for the contract to swing in the 10bps range around the index and TradeLayer&#x2019;s low fee makes basis trading effective in that range.</p>
+<h2 id="options">Options</h2>
+<p>Later, options will be activated and are based on the contract series numbering:</p>
+<p><strong>Info:</strong> n-expiry-P-strike</p>
+<p>With N as the underlying contractId of the original perp swap, the expiry block like with futures (it can be a block height other than futures) the Call or Put code C or P added after a hyphen, then the strike price.The protocol rounds strikes to the latest round number based on a 1% increment or a 2.5% increment for expirations &gt;1 month.Trades are all based on channel execution and assumed to be bilateral, thus the payloads can be customized even though the rounding rules standardize strikes to some extent. </p>
+<p>An option series can be European or American style, American delivers into the nearest-expiry future that is existent in the original contract series (expirations can be different) and that is closer to or equal to the expiration of the American style option. American options tend to be more expensive to price in the time value of money from possibly taking delivery and liquidating/reinvesting/cash-carry-hedging the underlying. If there are no futures with expiry block &lt;= the expory of the option, the option exercises into perp positions.</p>
+<h2 id="cross-margin">Cross-margin</h2>
+<p>TradeLayer does not support universal portfolio margin across multiple forms of collateral as this creates complex systemic risks based on correlation between collateral assets and covariance in different mis-matched collaterals and contract denominations.It does support automatic cross-margin within single collateral properties, thus perps, futures and options can all offset each other based on block-by-block settlement automatically.Even if contracts are illiquid in terms of trading volume each block they are marked to model based on time to expiry, recent premium and the mark price of the perp, which is the TWAP of the last few oracle publications or the VWAP of the underlying token index for native contracts.</p>
+<h2 id="expiration">Expiration</h2>
+<p>Futures expire into Perps if native or cash-settle if oracle based.Options are European style and likewise settle into Perps if native or cash if oracle.</p>
+<p><em>Last updated: [10<em>7</em>2024]</em></p>
 
                                 
                                 </section>
@@ -430,12 +410,12 @@ The Doge tokenomics will be more inflationary and the BTC tokenomics will be foc
 
             
                 
-                <a href="FEE.html" class="navigation navigation-prev " aria-label="Previous page: Fees">
+                <a href="LAYER_2.html" class="navigation navigation-prev " aria-label="Previous page: Layer 2">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="MACRO.html" class="navigation navigation-next " aria-label="Next page: Macro-economics">
+                <a href="INSURANCE.html" class="navigation navigation-next " aria-label="Next page: Insurance and Liquidation">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -446,7 +426,7 @@ The Doge tokenomics will be more inflationary and the BTC tokenomics will be foc
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Vesting and Tokenomics","level":"2.7","depth":1,"next":{"title":"Macro-economics","level":"2.8","depth":1,"path":"protocol/MACRO.md","ref":"protocol/MACRO.md","articles":[]},"previous":{"title":"Fees","level":"2.6","depth":1,"path":"protocol/FEE.md","ref":"protocol/FEE.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","tabs","highlight","sharing","fontsettings","theme-default"],"styles":{"website":"styles/custom.css"},"pluginsConfig":{"search-pro":{"cutWordLib":"nodejieba","defineWord":[]},"tabs":{},"highlight":{},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Patrick Dugan","engines":{"gitbook":"3.2.3"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TradeLayer Documentation","gitbook":"*","description":"Comprehensive guide to TradeLayer Protocol."},"file":{"path":"protocol/TOKENOMICS.md","mtime":"2024-10-09T13:59:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-10-10T17:52:59.987Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Derivatives","level":"2.4","depth":1,"next":{"title":"Insurance and Liquidation","level":"2.5","depth":1,"path":"protocol/INSURANCE.md","ref":"protocol/INSURANCE.md","articles":[]},"previous":{"title":"Layer 2","level":"2.3","depth":1,"path":"protocol/LAYER_2.md","ref":"protocol/LAYER_2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","tabs","highlight","sharing","fontsettings","theme-default"],"styles":{"website":"styles/custom.css"},"pluginsConfig":{"search-pro":{"cutWordLib":"nodejieba","defineWord":[]},"tabs":{},"highlight":{},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Patrick Dugan","engines":{"gitbook":"3.2.3"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TradeLayer Documentation","gitbook":"*","description":"Comprehensive guide to TradeLayer Protocol."},"file":{"path":"protocol/DERIVATIVES.md","mtime":"2024-10-10T14:44:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-12-09T19:03:25.992Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Vesting and Tokenomics · TradeLayer Documentation</title>
+        <title>Layer 2 · TradeLayer Documentation</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -53,10 +53,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="MACRO.html" />
+    <link rel="next" href="DERIVATIVES.html" />
     
     
-    <link rel="prev" href="FEE.html" />
+    <link rel="prev" href="TRADE_TYPES.html" />
     
 
     </head>
@@ -172,7 +172,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.3" data-path="LAYER_2.html">
+        <li class="chapter active" data-level="2.3" data-path="LAYER_2.html">
             
                 <a href="LAYER_2.html">
             
@@ -224,7 +224,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.7" data-path="TOKENOMICS.html">
+        <li class="chapter " data-level="2.7" data-path="TOKENOMICS.html">
             
                 <a href="TOKENOMICS.html">
             
@@ -352,7 +352,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Vesting and Tokenomics</a>
+        <a href=".." >Layer 2</a>
     </h1>
 </div>
 
@@ -367,42 +367,27 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h3 id="vesting-tokens">Vesting Tokens</h3>
-<h2 id="tl-and-tlvest">TL and TLVEST</h2>
-
-<img src="piechart.png" alt="Token Allocation Pie Chart" style="width: 100%; max-width: 600px;">
-
-
-<p>
-50,000 TL will be sold initially to get liquidity going.
-
-50,000 TL will be used to mint synthetic LTC against the Native TL/LTC Perpetual Swap settling off of the liquidity of the above 50k.
-
-150,000 TL will be auto-deposited on initialization of the protocol to the insurance fund for the TL/LTC perpetual swap. 
-
-This insurance fund accumulates buybacks with half of the fee revenue.
-
-250,000 TL are reserved in Vesting Tokens that will be 50% vested when the cumulative spot volume of the protocol is around 500 million LTC
-100% will be vested when the cumulative LTC spot volume reaches 1 billion LTC.
-
-Different ratios will apply to $TB and $TD on Bitcoin and Dogecoin. 
-
-The Doge tokenomics will be more inflationary and the BTC tokenomics will be focused on a fair launch with no initial liquid supply.</p>
-<h2 id="tli-and-tlivest">TLI and TLIVEST</h2>
-<h2 id="farming-and-airdrops">Farming and Airdrops</h2>
-<p>It&#x2019;s important that a DEx protocol has a reward for traders who make the DEx liquid and useful with their participation, especially in the early days of going from 0 liquidity to 1 liquidity.Like Homer Simpson said, I have 3 kids and 0 money, I wish I had 0 kids and 3 money.The early market makers who enable a DEx to have 3 money are very valuable and deserve a stake in the success of the DEx for that participation, but also this idea has been played out since DeFi summer 2020 to the effect usually of extreme token inflation, perp markets that price in huge negative funding for the dividend effect, unsophisticated retail buyers who can&#x2019;t price in all these variables, and eventually a massive dumping of the token as cynical farmers insta-stell their earned tokens.</p>
-<p>After a cycle of that showed us a series of charts with massive spiked to multi-billion dollar valuations (fully diluted) followed by massive dilution and 98% drawdowns, followed by maybe 300% pumps, this market cycle has given us the <strong>airdrop event</strong>.This builds FOMO in users who come try out the new pre-token product, producing a lot of numbers such as volume or Total Value Locked that seem like real traction, and then the <strong>event</strong> happens, people often isnta-sell and move on to the next anticipated airdrop.Sometimes the token pumps for a 2-5x afterwards but since they debut at something like 1B FDV the real revenue of the product, maybe an impressive &gt;10M a year, can&#x2019;t justify those valuations and the same result happens.</p>
-<h2 id="rebate-programs">Rebate Programs</h2>
-<p>Some DExes that are fee competitive and reasonably fast have offered tokens that yield to trades based on measured programs, rather than a built-in perpetual algorithm, and these distribute much or all of the revenue of the DEx to holders and/or stakers, but the dilution causes quick dumping as traders try to recover a fraction of their monthly trading fee expenditure.The result is a market cap that goes mostly sideways while the token price sags.</p>
-<p>This last incarnation isn&#x2019;t so bad, the yield from the revenues off-sets the price drops and eventually the dilution slows down and the thing bottoms, and then the combined price recovery and yield makes it an attractive hold.Meanwhile it has the effect of subsidizing trade activity in part.One problem is that the managed promotional periods are not predictable for users and involve the centralized administration of what seems to be a common enterprise, a truly decentralized protocol should replace that with a more elegant mathematical formula that anyone can predict and anticipate both the dilution and the effect at-the-market discount to fees that the token rebate represents.</p>
-<h2 id="long-term-vesting">Long-term Vesting</h2>
-<p>Now a wrinkle: what if people can&#x2019;t easily dump the rebate? You make the rebate a Vesting Token that involves a future expectation.This offsets the immediate dilution, people can try to OTC sell their VTs at a discount of they&#x2019;re major MMs and hold size, or broker an OTC buy and reach out to scoop lots of modest positions from medium-sized traders, but then flipping those still involves a long-term expectation of revenue growth or at least stability.This market effect offsets the immediacy of selling and encourages collection of the income interests in stronger hands.</p>
-<p>Therefore our approach is to rebate trades on two levels: one based on whitelisting for the early program to create Sybil resistance, wash traders will be revoked.This rebate will be higher than the fee rate in terms of expected current market value.The baseline rebate will be initially equal to the fee and decline logarithmically as the cumulative volume on the DEx increases through orders of magnitude in LTC equivalent, eventually resting at about 10% of the fee rate after years of scale volume.This makes wash trading still expensive and is economically Sybil resistant.</p>
-<p>The TLIVEST tokens will vest on a logarithmic scale from 10M LTC cumulative volume to 1T LTC cumulative volume, unlike the TLVEST tokens that are linear up to 100M LTC, 20% of the TLIVEST tokens will vest by 100M LTC, another 20% by 1B, another 20% by 10B, then another 20% by 100B and the last 20% approaching 1T.The rebates will come pre-vested proportionate to the total historical volume of the DEx at these times.</p>
-<h2 id="why-two-tokens">Why two tokens?</h2>
-<p>While it adds some confusion and dilutes brand value, the choice of decoupling native collateral from trade incentives is necessary to make the collateral backing deflationary while enabling calibrated inflation for the dilutive incentives.It&#x2019;s like how central banks hold gold and issue liabilities, one is there to keep the system stable in emergencies and keep the central bank operational, the other is there to juice the growth of the economy and earn out over time.</p>
-<p>Having the native coin be the core collateral for synthetic currency that is meant to reduce-risk and be useful collateral in ways that UTXO money cannot currently serve.If an exchange&#x2019;s deposits are all risky liabilities backed by the discounted cashflows of the exchange, like say FTX when their books were based on FTT margin and internal loans to their captive hedge fund, there&#x2019;s a horrible correlation between the decline in those liabilities market value and the decline in the expected future cashflows of the venue.In other words, scheme make crash worse, kill everything, super bad.Another terrifying example of this was the LUNA/UST model.TradeLayer&#x2019;s design has gone through iterations since 2017 and learned the lessons from the deca-billion sized failures of the past.</p>
-<p>More on this in the next article.</p>
+                                <h3 id="layer-2-model">Layer 2 Model</h3>
+<p>The brilliant thing about the Lightning Network is that two signatures on a 2-of-2 multisig becomes an immediately binding consensus lock of a transaction, and that transaction doesn&#x2019;t need to be published immediately.The limiting factor of the Lightning Network is that the UTXO model, which very memory efficient to track with Merkelization, is a nightmare to route.Account-based tokens can simply be debited from address A and credited to address B with logic, whether a smart contract like on Ethereum or inline logic like in TradeLayer.Combining the two models means you can get fast consensus in a Bitcoin-like environment without relying on slow block confirmation, and it also means routing can be painless.</p>
+<p>And so, we built Trade Channels.Trade Channels are a Layer 2 model based on the following 4 transaction types:</p>
+<h2 id="commit">Commit</h2>
+<p>Commiting tokens takes them out of the spendable model that they live in on-chain by default, and puts them into Layer 2 mode.The principle differences follow:</p>
+<p>Tokens move from the Available column in the tally map to Channel
+Tokens can be pledged to an address controlled by the user or a 2-of-2 multisig they share with a counterparty
+Channels are recorded as having commit addresses and columns, A and B, which column a commiter is assigned is deterministic based on the sequence of the last letter of the address or the second to last in case of a tie and the third to last character in case of a rare double-tie.</p>
+<h2 id="withdraw">Withdraw</h2>
+<p>Withdraw transactions are issued from the address that originally Committed them to the layer 2 system, pulling them back, but only after a 7 block waiting period.This period gives time for a counterparty to detect the pending Withdraw and publish any co-signed trades or transfers that have already been agreed to, this prevents welching on trades.</p>
+<p>The other major benefit of the Withdraw model is it decouples custody keys from trading keys.In other words, you can Commit tokens by building a transaction and signing it on an airgapped computer, copy the PBST string between screens to maintain the gap, and then later issue a Withdraw to pull the tokens back.Just like how centralized exchanges work, having various controls and the ability to shut-off API keys while the underlying funds are kept in something like Fireblocks, with a separate protocol for ordering withdrawals, TradeLayer brings this requirement for professional money management and better retail security to DeFi.</p>
+<h2 id="transfer">Transfer</h2>
+<p>Transfer is how the Layer 2 becomes flexible enough to hot-route capital around between any two channel addresses.Since it&#x2019;s relatively fast to spin up a new channel with a new counterparty, it&#x2019;s possible to also quickly build and present a valid Transfer tx to that new counterparty, either signed from your own wallet&#x2019;s address or pinging a counterparty to liberate funds.</p>
+<h2 id="pnl-settle">PNL Settle</h2>
+<p>Ok so we can put funds onto the layer 2 model, which is relevant because you hold this string ot withdraw it, freeing you to co-sign trades and overrule the withdrawal assuming you haven&#x2019;t published the trade immediately.And, you can flexibly transfer capital between channels to make this system work like an orderbook.What&#x2019;s left? To really make a layer 2 scale, you want to save on publishing transactions, just signing them is enough! You can zip trades around, opening and closing positions, booking profits and losses, all day long, just keep signing, your counterparty may be a market maker who is hedging as they sign with you, relying on the option of paying miner fees to publish the trade, but you&#x2019;re both happy to basically save lots of money and trade <strong>almost for free</strong>.That&#x2019;s scaling.</p>
+<p>The PNL Settle transaction makes this possible.The Token and Contract Channel Trade transactions have an expiration block, usually a few blocks ahead of when they are made, this is to prevent abuse of Counterparty Value Adjustment, where the party holding the partially-signed trade might wait for seconds or minutes to co-sign, the partial signature is like a free option.Filtering against abusive traders can help, binding to a smart contract and enforcing a tighter time-limit based on NEAR&#x2019;s 300ms block interval could overkill the problem, but TradeLayer by default has the expiration parameter as a base.The PNL Settle includes as a parameter the txid of the transaction you <em>would</em> have published, if you publish the PNL Settle then that transaction would be invalid in TradeLayer&#x2019;s consensus logic, it&#x2019;s like txid blacklisting.</p>
+<p>Therefore it&#x2019;s possible to refresh a transaction every few blocks by pinging back and forth and producing a PNL Settle and a new trade.You can ping pong like that all day long, keeping a position alive, or you can do a settle based on the price of a closing trade.Imagine you signed a long trade with a market maker, the market goes down, a few blocks pass, you PNL Settle a loss and make a new long trade at the mark price matching the PNL Settle&#x2019;s value, then the market keeps dumping, you dump the long, you make another PNL Settle neutralizing that 2nd trade and neglect to make a new trade.</p>
+<p>By using base 94 ASCII encoding it&#x2019;s possible to crunch txid&#x2019;s down to 30 bytes and pack 2 of them in the OP_Return, meaning it&#x2019;s possible to neutralize the previous PNL Settle and the previous trade update.Don&#x2019;t want to keep trading, don&#x2019;t make a new transaction, instead add in to the OP_Return a mark price and an update flag to update the first txid of the latest trade and only invalidate the txid of the last PNL Settlement; this way each PNL Settlement is final and you don&#x2019;t need to hold on to tons of these to publish later.</p>
+<p>This flexibility seems a bit complicated if you were keeping track of it by hand but it can all fit into wallet code and run seamlessly.In this way, we can potentially achieve insane levels of transaction throughput at ultra-low latencies with average protocol and miner fees approaching 0 as market makers do more flow with high frequency liquidity takers.It&#x2019;s a unique approach compared to the rest of DeFi with radical potential to provide market structure for global transactions, millions a day, even hundreds of millions.</p>
+<p>And when you do publish, the fee is 0.5 bps.</p>
+<p><em>Last updated: [10<em>7</em>2024]</em></p>
 
                                 
                                 </section>
@@ -430,12 +415,12 @@ The Doge tokenomics will be more inflationary and the BTC tokenomics will be foc
 
             
                 
-                <a href="FEE.html" class="navigation navigation-prev " aria-label="Previous page: Fees">
+                <a href="TRADE_TYPES.html" class="navigation navigation-prev " aria-label="Previous page: Trade Types">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="MACRO.html" class="navigation navigation-next " aria-label="Next page: Macro-economics">
+                <a href="DERIVATIVES.html" class="navigation navigation-next " aria-label="Next page: Derivatives">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -446,7 +431,7 @@ The Doge tokenomics will be more inflationary and the BTC tokenomics will be foc
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Vesting and Tokenomics","level":"2.7","depth":1,"next":{"title":"Macro-economics","level":"2.8","depth":1,"path":"protocol/MACRO.md","ref":"protocol/MACRO.md","articles":[]},"previous":{"title":"Fees","level":"2.6","depth":1,"path":"protocol/FEE.md","ref":"protocol/FEE.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","tabs","highlight","sharing","fontsettings","theme-default"],"styles":{"website":"styles/custom.css"},"pluginsConfig":{"search-pro":{"cutWordLib":"nodejieba","defineWord":[]},"tabs":{},"highlight":{},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Patrick Dugan","engines":{"gitbook":"3.2.3"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TradeLayer Documentation","gitbook":"*","description":"Comprehensive guide to TradeLayer Protocol."},"file":{"path":"protocol/TOKENOMICS.md","mtime":"2024-10-09T13:59:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-10-10T17:52:59.987Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Layer 2","level":"2.3","depth":1,"next":{"title":"Derivatives","level":"2.4","depth":1,"path":"protocol/DERIVATIVES.md","ref":"protocol/DERIVATIVES.md","articles":[]},"previous":{"title":"Trade Types","level":"2.2","depth":1,"path":"protocol/TRADE_TYPES.md","ref":"protocol/TRADE_TYPES.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","tabs","highlight","sharing","fontsettings","theme-default"],"styles":{"website":"styles/custom.css"},"pluginsConfig":{"search-pro":{"cutWordLib":"nodejieba","defineWord":[]},"tabs":{},"highlight":{},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Patrick Dugan","engines":{"gitbook":"3.2.3"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TradeLayer Documentation","gitbook":"*","description":"Comprehensive guide to TradeLayer Protocol."},"file":{"path":"protocol/LAYER_2.md","mtime":"2024-10-09T13:50:33.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-12-09T19:03:25.992Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

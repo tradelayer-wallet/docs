@@ -369,25 +369,15 @@
                                 
                                 <h3 id="vesting-tokens">Vesting Tokens</h3>
 <h2 id="tl-and-tlvest">TL and TLVEST</h2>
-
-<img src="piechart.png" alt="Token Allocation Pie Chart" style="width: 100%; max-width: 600px;">
-
-
-<p>
-50,000 TL will be sold initially to get liquidity going.
-
-50,000 TL will be used to mint synthetic LTC against the Native TL/LTC Perpetual Swap settling off of the liquidity of the above 50k.
-
-150,000 TL will be auto-deposited on initialization of the protocol to the insurance fund for the TL/LTC perpetual swap. 
-
-This insurance fund accumulates buybacks with half of the fee revenue.
-
-250,000 TL are reserved in Vesting Tokens that will be 50% vested when the cumulative spot volume of the protocol is around 500 million LTC
-100% will be vested when the cumulative LTC spot volume reaches 1 billion LTC.
-
-Different ratios will apply to $TB and $TD on Bitcoin and Dogecoin. 
-
-The Doge tokenomics will be more inflationary and the BTC tokenomics will be focused on a fair launch with no initial liquid supply.</p>
+<p>There is a supply of 500,000 TL tokens which is the exclusive form of native collateral that can be used to mint synthetic currency.Of this, 100,000 are instantiated inside the insurance fund for the contractId 1, the native TL/LTC contract, 150,000 are loose and 250,000 are tied to TLVEST tokens that vest based on the cumulative LTC spot volume in the protocol, on a linear scale starting from 1000 LTC to 100,000,000.At 1M LTC cumulative volume ~0.999% of those TLVEST tokens will yield liquid vesting tokens, at 10M LTC the number will be close to 10% and at 100M LTC all of the 250k TLVEST tokens will have yielded the TL tokens associated.TLVEST cannot be traded in the protocol but it can be sent.</p>
+<p>50,000 TL will be sold initially to get liquidity going.</p>
+<p>50,000 TL will be used to mint synthetic LTC against the Native TL/LTC Perpetual Swap settling off of the liquidity of the above 50k.</p>
+<p>150,000 TL will be auto-deposited on initialization of the protocol to the insurance fund for the TL/LTC perpetual swap. </p>
+<p>This insurance fund accumulates buybacks with half of the fee revenue.</p>
+<p>250,000 TL are reserved in Vesting Tokens that will be 50% vested when the cumulative spot volume of the protocol is around 500 million LTC
+100% will be vested when the cumulative LTC spot volume reaches 1 billion LTC.</p>
+<p>Different ratios will apply to $TB and $TD on Bitcoin and Dogecoin. </p>
+<p>The Doge tokenomics will be more inflationary and the BTC tokenomics will be focused on a fair launch with no initial liquid supply.</p>
 <h2 id="tli-and-tlivest">TLI and TLIVEST</h2>
 <h2 id="farming-and-airdrops">Farming and Airdrops</h2>
 <p>It&#x2019;s important that a DEx protocol has a reward for traders who make the DEx liquid and useful with their participation, especially in the early days of going from 0 liquidity to 1 liquidity.Like Homer Simpson said, I have 3 kids and 0 money, I wish I had 0 kids and 3 money.The early market makers who enable a DEx to have 3 money are very valuable and deserve a stake in the success of the DEx for that participation, but also this idea has been played out since DeFi summer 2020 to the effect usually of extreme token inflation, perp markets that price in huge negative funding for the dividend effect, unsophisticated retail buyers who can&#x2019;t price in all these variables, and eventually a massive dumping of the token as cynical farmers insta-stell their earned tokens.</p>
@@ -446,7 +436,7 @@ The Doge tokenomics will be more inflationary and the BTC tokenomics will be foc
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Vesting and Tokenomics","level":"2.7","depth":1,"next":{"title":"Macro-economics","level":"2.8","depth":1,"path":"protocol/MACRO.md","ref":"protocol/MACRO.md","articles":[]},"previous":{"title":"Fees","level":"2.6","depth":1,"path":"protocol/FEE.md","ref":"protocol/FEE.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","tabs","highlight","sharing","fontsettings","theme-default"],"styles":{"website":"styles/custom.css"},"pluginsConfig":{"search-pro":{"cutWordLib":"nodejieba","defineWord":[]},"tabs":{},"highlight":{},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Patrick Dugan","engines":{"gitbook":"3.2.3"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TradeLayer Documentation","gitbook":"*","description":"Comprehensive guide to TradeLayer Protocol."},"file":{"path":"protocol/TOKENOMICS.md","mtime":"2024-10-09T13:59:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-10-10T17:52:59.987Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Vesting and Tokenomics","level":"2.7","depth":1,"next":{"title":"Macro-economics","level":"2.8","depth":1,"path":"protocol/MACRO.md","ref":"protocol/MACRO.md","articles":[]},"previous":{"title":"Fees","level":"2.6","depth":1,"path":"protocol/FEE.md","ref":"protocol/FEE.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","tabs","highlight","sharing","fontsettings","theme-default"],"styles":{"website":"styles/custom.css"},"pluginsConfig":{"search-pro":{"cutWordLib":"nodejieba","defineWord":[]},"tabs":{},"highlight":{},"sharing":{"all":["facebook","google","twitter","weibo","instapaper"],"facebook":true,"google":false,"instapaper":false,"twitter":true,"vk":false,"weibo":false},"fontsettings":{"family":"sans","size":2,"theme":"white"},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}}},"theme":"default","author":"Patrick Dugan","engines":{"gitbook":"3.2.3"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TradeLayer Documentation","gitbook":"*","description":"Comprehensive guide to TradeLayer Protocol."},"file":{"path":"protocol/TOKENOMICS.md","mtime":"2024-12-09T18:56:08.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-12-09T19:03:25.992Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
