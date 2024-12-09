@@ -5,6 +5,21 @@
 
 There is a supply of 500,000 TL tokens which is the exclusive form of native collateral that can be used to mint synthetic currency.Of this, 100,000 are instantiated inside the insurance fund for the contractId 1, the native TL/LTC contract, 150,000 are loose and 250,000 are tied to TLVEST tokens that vest based on the cumulative LTC spot volume in the protocol, on a linear scale starting from 1000 LTC to 100,000,000.At 1M LTC cumulative volume ~0.999% of those TLVEST tokens will yield liquid vesting tokens, at 10M LTC the number will be close to 10% and at 100M LTC all of the 250k TLVEST tokens will have yielded the TL tokens associated.TLVEST cannot be traded in the protocol but it can be sent.
 
+50,000 TL will be sold initially to get liquidity going.
+
+50,000 TL will be used to mint synthetic LTC against the Native TL/LTC Perpetual Swap settling off of the liquidity of the above 50k.
+
+150,000 TL will be auto-deposited on initialization of the protocol to the insurance fund for the TL/LTC perpetual swap. 
+
+This insurance fund accumulates buybacks with half of the fee revenue.
+
+250,000 TL are reserved in Vesting Tokens that will be 50% vested when the cumulative spot volume of the protocol is around 500 million LTC
+100% will be vested when the cumulative LTC spot volume reaches 1 billion LTC.
+
+Different ratios will apply to $TB and $TD on Bitcoin and Dogecoin. 
+
+The Doge tokenomics will be more inflationary and the BTC tokenomics will be focused on a fair launch with no initial liquid supply.
+
 ## TLI and TLIVEST
 
 ## Farming and Airdrops
