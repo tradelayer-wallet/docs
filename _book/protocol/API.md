@@ -194,11 +194,12 @@ Spot Markets Response Data: {
       	pairString: 'sLTC/TBILL'
     	}
   	],
-  	icon: 'https://bitcoin-capital.bg/wp-content/uploads/2019/07/1920px-LTC-400-min-300x300.png',
+  	icon: '(icon URL omitted from docs — previously hotlinked from a third-party host, see note below)',
   	disabled: false
 	}
   ]
 }
 
+> **Note:** In live `getSpotMarkets` responses, `icon` contains the URL of the market's icon image. The example above previously hotlinked an icon hosted on bitcoin-capital.bg, an unrelated third-party site. Hotlinking third-party hosts from the docs creates availability and privacy (request-tracking) exposure for readers, so the URL has been replaced with a plain-text placeholder. Official Litecoin branding should be sourced from the Litecoin Foundation's brand resources instead.
 
-_Last updated: [10*8*2024]_
+_Last updated: [10*13*2026]_
