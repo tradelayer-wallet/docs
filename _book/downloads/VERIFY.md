@@ -18,9 +18,11 @@ The same values in `sha256sum -c` format (save as `SHA256SUMS` next to the downl
 efab02f55b2532e2e3912621d55584db20c385a0141887400809e7ad4d477914  TL-Extension.zip
 ```
 
+These hashes apply to the binaries as of the date stated above; if the binaries change and this page is not updated, treat the published hashes as unverifiable.
+
 ## How to verify
 
-Run the command for your operating system in the directory containing the downloaded file. The printed hash must match the table above **exactly**. Substitute `TL-Extension.zip` for the file name when verifying the browser extension.
+Run the command for your operating system in the directory containing the downloaded file. The printed hash must match the table above — compare **case-insensitively**, since Windows `certutil` and `Get-FileHash` print uppercase hex. Substitute `TL-Extension.zip` for the file name when verifying the browser extension.
 
 ### Windows
 

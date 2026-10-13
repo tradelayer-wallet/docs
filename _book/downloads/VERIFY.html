@@ -413,8 +413,9 @@
 <p>The same values in <code>sha256sum -c</code> format (save as <code>SHA256SUMS</code> next to the downloaded files):</p>
 <pre><code>61ba293cfb84d7f3ecb94902b1df0ad8a7cc79780fcf7551662edd5ff5fc2ce8  TradeLayer-Wallet-Setup-0.1.exe
 efab02f55b2532e2e3912621d55584db20c385a0141887400809e7ad4d477914  TL-Extension.zip</code></pre>
+<p>These hashes apply to the binaries as of the date stated above; if the binaries change and this page is not updated, treat the published hashes as unverifiable.</p>
 <h2 id="how-to-verify">How to verify</h2>
-<p>Run the command for your operating system in the directory containing the downloaded file. The printed hash must match the table above <strong>exactly</strong>. Substitute <code>TL-Extension.zip</code> for the file name when verifying the browser extension.</p>
+<p>Run the command for your operating system in the directory containing the downloaded file. The printed hash must match the table above — compare <strong>case-insensitively</strong>, since Windows <code>certutil</code> and <code>Get-FileHash</code> print uppercase hex. Substitute <code>TL-Extension.zip</code> for the file name when verifying the browser extension.</p>
 <h3 id="windows">Windows</h3>
 <p>Command Prompt:</p>
 <pre><code>certutil -hashfile TradeLayer-Wallet-Setup-0.1.exe SHA256</code></pre>

@@ -8,7 +8,7 @@ Please report security vulnerabilities **privately** — do not open a public Gi
 - Please include: a description of the issue, steps to reproduce, affected versions/artifacts, and a proof of concept where possible.
 - Please allow reasonable time for a fix before any public disclosure.
 
-**Maintainers:** enable [GitHub private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/working-with-global-security-advisories-in-the-github-advisory-database/about-github-security-advisories) for this repository (Settings → Security → Private vulnerability reporting) so researchers can report privately through GitHub. As of this writing, private reporting is **not** enabled, which is why the external review in issue #1 was published publicly.
+**Maintainers:** enable [GitHub private vulnerability reporting](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately) for this repository (Settings → Security → Private vulnerability reporting) so researchers can report privately through GitHub. As of this writing, private reporting is **not** enabled, which is why the external review in issue #1 was published publicly.
 
 ## Known limitation: distributed binaries are UNSIGNED
 
@@ -36,7 +36,9 @@ Until signing is in place, the checksums below — also published in the docs un
 
 Values were computed directly from the blobs committed to `main` and cross-checked against the independent review in issue #1 (2026-10-13). **Update this table and `_book/downloads/VERIFY.md` whenever a binary is replaced.**
 
-> Note: the current binaries are committed as plain git blobs, not Git LFS objects. The only LFS-tracked artifacts in this repository's history are the removed Linux builds `TradeLayer-Wallet-0.0.15.AppImage` (sha256 `d24a1d8fdb0d6faacd0c05a6bb2a50c4155786d26b697f6e65b3fa6799f9d229`) and `TradeLayer-Wallet-0.0.16.AppImage` (sha256 `c0be84e355d2861bdfc372e723af917c742deaf2e5dfcad7b1b9bdf3489c75fe`), recorded here from their LFS pointer files for completeness. They are no longer distributed from `main`.
+> **Note on historical binaries.** The current binaries are committed as plain git blobs, not Git LFS objects. The removed Linux builds are the only artifacts in this repository's history that were converted to Git LFS pointers: `TradeLayer-Wallet-0.0.15.AppImage` (pointer oid sha256 `d24a1d8fdb0d6faacd0c05a6bb2a50c4155786d26b697f6e65b3fa6799f9d229`) and `TradeLayer-Wallet-0.0.16.AppImage` (pointer oid sha256 `c0be84e355d2861bdfc372e723af917c742deaf2e5dfcad7b1b9bdf3489c75fe`). Older `.exe` builds (0.0.12/0.0.15/0.0.16) remain in history as raw blobs with **no published checksums**.
+>
+> **Both AppImage hashes above are taken from LFS pointer files only — the LFS objects were never fetched or verified**, so treat them as unverified assertions, not as checksums computed from actual binaries. Git history contains both forms of `TradeLayer-Wallet-0.0.15.AppImage`: the LFS pointer recording `d24a1d8f…` and a raw 100,956,365-byte blob (commit `7d8cfda`) whose actual SHA-256 is `2e543330f6bab986a99bbd3841907891cb00db1153fde7bb1135b3eb23d485fa` — which does **not** match the pointer-derived value. History also contains two different LFS pointers for `TradeLayer-Wallet-0.0.16.AppImage` (an earlier one recording `b867cc1fe356b1f2b98b4f963404f3eeaf6330faf1ca9b997d669a6cf7c08760`; the value recorded here is the later `c0be84e3…`). None of the historical AppImage hashes have been verified against real binaries. The AppImages are no longer distributed from `main`.
 
 ## Scope
 
