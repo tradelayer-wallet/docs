@@ -388,7 +388,7 @@
                                 <h1 id="verify-downloads">Verify Downloads</h1>
 <p>TradeLayer distributes the desktop wallet installer and the browser extension as raw binaries from this repository. These binaries are currently <strong>unsigned</strong>, so a SHA-256 checksum is the only integrity check available today. It catches corrupted or incomplete downloads, but it is not an independent proof of authenticity (see <a href="#limitations">Limitations</a>). Verify the file <strong>before</strong> installing or loading it.</p>
 <h2 id="official-checksums">Official checksums</h2>
-<p>The values below match the binaries committed to the <code>main</code> branch of the <a href="https://github.com/tradelayer-wallet/docs" target="_blank">tradelayer-wallet/docs</a> repository (verified 2026-10-13):</p>
+<p>The values below match the binaries committed to the <code>main</code> branch of this repository (verified 2026-10-13):</p>
 <table>
 <thead>
 <tr>
@@ -410,33 +410,32 @@
 </tr>
 </tbody>
 </table>
-<p>The same values in <code>sha256sum -c</code> format (save as <code>SHA256SUMS</code> next to the downloaded files):</p>
-<pre><code>61ba293cfb84d7f3ecb94902b1df0ad8a7cc79780fcf7551662edd5ff5fc2ce8  TradeLayer-Wallet-Setup-0.1.exe
-efab02f55b2532e2e3912621d55584db20c385a0141887400809e7ad4d477914  TL-Extension.zip</code></pre>
 <p>These hashes apply to the binaries as of the date stated above; if the binaries change and this page is not updated, treat the published hashes as unverifiable.</p>
 <h2 id="how-to-verify">How to verify</h2>
-<p>Run the command for your operating system in the folder that contains the downloaded file, then compare the printed hash with the table above.</p>
+<p>Run the command for your operating system in the folder that contains the downloaded file, then compare the full printed hash with the value for that file in the table above. Substitute <code>TL-Extension.zip</code> for the file name when verifying the browser extension.</p>
 <ul>
 <li>Compare the <strong>full 64-character</strong> value. A match on only the first few characters is a failure.</li>
 <li>Letter case does not matter, because some tools print uppercase hex.</li>
-<li>If the command errors, prints nothing, or the values differ, <strong>do not run the file</strong> (see <a href="#warnings">Warnings</a>).</li>
-<li>Substitute <code>TL-Extension.zip</code> for the file name when verifying the browser extension.</li>
+<li>If a command errors, prints nothing, or the values differ, <strong>do not run the file</strong> (see <a href="#warnings">Warnings</a>).</li>
+<li>The pass/fail commands below use the placeholder <code>&lt;SHA-256 from the table&gt;</code>. Replace it with the value from the table for your file. If you leave the placeholder in, the command reports a failure, so a mistake cannot show a false pass.</li>
 </ul>
 <h3 id="windows">Windows</h3>
-<p>Command Prompt:</p>
+<p>Command Prompt, prints the hash to compare by eye:</p>
 <pre><code>certutil -hashfile TradeLayer-Wallet-Setup-0.1.exe SHA256</code></pre>
-<p>PowerShell:</p>
+<p>PowerShell, prints the hash to compare by eye:</p>
 <pre><code>Get-FileHash .\TradeLayer-Wallet-Setup-0.1.exe -Algorithm SHA256</code></pre>
-<p>For a plain pass/fail answer in PowerShell, which prints <code>True</code> only if the hash matches (case is ignored):</p>
-<pre><code>(Get-FileHash .\TradeLayer-Wallet-Setup-0.1.exe -Algorithm SHA256).Hash -eq '61ba293cfb84d7f3ecb94902b1df0ad8a7cc79780fcf7551662edd5ff5fc2ce8'</code></pre>
+<p>PowerShell pass/fail check, prints <code>True</code> only if the hash matches (case is ignored):</p>
+<pre><code>(Get-FileHash .\TradeLayer-Wallet-Setup-0.1.exe -Algorithm SHA256).Hash -eq '&lt;SHA-256 from the table&gt;'</code></pre>
 <h3 id="macos">macOS</h3>
 <pre><code>shasum -a 256 TradeLayer-Wallet-Setup-0.1.exe</code></pre>
-<p>The installer is a Windows program. On macOS this command only checks the copy you downloaded.</p>
+<p>Pass/fail check, prints <code>OK</code> only if the hash matches and <code>FAILED</code> otherwise:</p>
+<pre><code>echo "&lt;SHA-256 from the table&gt;  TradeLayer-Wallet-Setup-0.1.exe" | shasum -a 256 -c -</code></pre>
+<p>The installer is a Windows program, so hashing it on macOS only confirms that your copy matches the table.</p>
 <h3 id="linux">Linux</h3>
 <pre><code>sha256sum TradeLayer-Wallet-Setup-0.1.exe</code></pre>
-<p>Or, with the <code>SHA256SUMS</code> file from above, which prints <code>OK</code> or <code>FAILED</code> for each listed file:</p>
-<pre><code>sha256sum -c SHA256SUMS</code></pre>
-<p>A file you did not download is reported as an error. Only the line for the file you downloaded matters, and it must say <code>OK</code>.</p>
+<p>Pass/fail check, prints <code>OK</code> only if the hash matches and <code>FAILED</code> otherwise:</p>
+<pre><code>echo "&lt;SHA-256 from the table&gt;  TradeLayer-Wallet-Setup-0.1.exe" | sha256sum -c -</code></pre>
+<p>If the placeholder was not replaced, the command reports that no properly formatted checksum line was found and exits with an error. Treat that as a failed check.</p>
 <h2 id="warnings">Warnings</h2>
 <blockquote>
 <p><strong>Only download TradeLayer software from official sources</strong> — the <a href="https://tradelayer.org/downloads" target="_blank">tradelayer.org/downloads</a> page or this repository. Never install a binary that was forwarded to you by a third party, surfaced by a search ad, or offered in a chat room.</p>
@@ -448,9 +447,9 @@ efab02f55b2532e2e3912621d55584db20c385a0141887400809e7ad4d477914  TL-Extension.z
 <ul>
 <li>The binaries are currently <strong>unsigned</strong> (no Authenticode / code-signing), so your operating system cannot vouch for the publisher. Windows SmartScreen may warn about the installer; verifying the checksum is the mitigation available today.</li>
 <li>A checksum proves only that your copy matches the file this repository publishes now. It cannot prove who built the binary. The checksums are served from the same repository as the binaries, so anyone who can change a binary there can change its checksum too, and a matching hash does not protect you against a compromised repository. Do not accept a checksum copied from a forum, chat, search result, or any other third-party page.</li>
-<li>The long-term fix is code signing plus GPG-signed checksums; see <a href="https://github.com/tradelayer-wallet/docs/blob/main/SECURITY.md" target="_blank">SECURITY.md</a> for the recommended roadmap.</li>
+<li>The long-term fix is code signing plus GPG-signed checksums; see <code>SECURITY.md</code> in this repository for the recommended roadmap.</li>
 </ul>
-<p><em>Last updated: [10*13*2026]</em></p>
+<p><em>Last updated: 2026-10-13</em></p>
 
 
                                 
