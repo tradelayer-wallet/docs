@@ -23,4 +23,6 @@ Download the desktop wallet to get started:
 
 [Start Trading](https://tradelayer.org/downloads)
 
+Before installing, check the file against its published checksum: see [Verify Downloads](../downloads/VERIFY.md).
+
 _Last updated: [10*7*2024]_
