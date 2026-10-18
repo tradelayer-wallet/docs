@@ -30,7 +30,8 @@ run_case() {
     return
   fi
   if ! (cd "$dir" && eval "$edit" \
-      && { git diff --quiet || git -c user.name=test -c user.email=test@example.invalid commit -q -am fixture; }); then
+      && git add -A \
+      && { git diff --cached --quiet || git -c user.name=test -c user.email=test@example.invalid commit -q -m fixture; }); then
     echo "ERROR $name: fixture edit failed"
     failures=$((failures + 1))
     return
@@ -71,7 +72,50 @@ json.dump(data, open(path, "w", encoding="utf-8"), ensure_ascii=False)
 ' _book/search_plus_index.json "$1"
 }
 
+# Rewrites every 64-hex checksum in the authored and generated copies in upper case.
+uppercase_hashes() {
+  python3 -I -c '
+import re, sys
+for path in sys.argv[1:]:
+    text = open(path, encoding="utf-8").read()
+    text = re.sub(r"[0-9a-f]{64}", lambda m: m.group(0).upper(), text)
+    open(path, "w", encoding="utf-8").write(text)
+' _book/downloads/VERIFY.md _book/downloads/VERIFY.html _book/search_plus_index.json
+}
+
+# Commits a third download, _book/Extra.zip, with its row in every copy.
+add_extra_download() {
+  printf 'extra build\n' > _book/Extra.zip
+  local h size
+  h=$(sha256sum _book/Extra.zip | cut -d' ' -f1)
+  size=$(stat -c %s _book/Extra.zip)
+  python3 -I -c '
+import json, sys
+h, size = sys.argv[1], sys.argv[2]
+md = "_book/downloads/VERIFY.md"
+lines = open(md, encoding="utf-8").read().split("\n")
+i = next(n for n, line in enumerate(lines) if line.startswith("| [TL-Extension.zip]"))
+lines.insert(i + 1, "| [Extra.zip](../Extra.zip) (test) | %s | `%s` |" % (size, h))
+open(md, "w", encoding="utf-8").write("\n".join(lines))
+' "$h" "$size"
+  insert_html "<p>Extra.zip $size <code>$h</code></p>"
+  python3 -I -c '
+import json, sys
+path, h, size = sys.argv[1], sys.argv[2], sys.argv[3]
+data = json.load(open(path, encoding="utf-8"))
+data["downloads/VERIFY.html"]["body"] += " Extra.zip %s %s" % (size, h)
+json.dump(data, open(path, "w", encoding="utf-8"), ensure_ascii=False)
+' _book/search_plus_index.json "$h" "$size"
+}
+
 run_case honest-head pass 'true'
+
+run_case honest-uppercase-hashes pass 'uppercase_hashes'
+
+run_case honest-third-download pass 'add_extra_download'
+
+run_case download-without-row fail \
+  "printf 'extra build\\n' > _book/Extra.zip"
 
 run_case honest-table-cells pass \
   "insert_html '<table><tr><td>92879604</td><td><code>${bogus:0:63}</code></td></tr></table>'"

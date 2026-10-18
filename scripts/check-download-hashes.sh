@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Checks the download checksums on the Verify Downloads page.
 #
-# 1. Each checksum row in _book/downloads/VERIFY.md equals the SHA-256 and the
-#    byte size of the committed binary (HEAD:<file>), so the page cannot drift
-#    from the published file.
+# 1. Each committed binary in _book (.exe and .zip) has exactly one checksum row
+#    in _book/downloads/VERIFY.md, and each row equals the SHA-256 and the byte
+#    size of the committed binary (HEAD:<file>), so the page cannot drift from
+#    the published file. Hex case does not matter.
 # 2. Each checksum is written once in VERIFY.md, the authored source, and once
 #    in each generated copy (VERIFY.html and the search index entry for the
 #    page), and each copy gives the same size next to it. No other committed
@@ -47,11 +48,21 @@ verify_slots() {
     | sed -E "s/.*-eq '([^']*)'\$/\1/"
 }
 
+binaries=$(git ls-tree --name-only HEAD _book/ | grep -E '\.(exe|zip)$')
 rows=$(grep -E '^\| \[[^]]+\]\(\.\./[^)]+\)' "$doc")
 row_count=$(printf '%s\n' "$rows" | grep -c .)
-if [ "$row_count" -ne 2 ]; then
-  fail "expected 2 checksum rows in $doc, found $row_count"
+binary_count=$(printf '%s\n' "$binaries" | grep -c .)
+if [ "$row_count" -ne "$binary_count" ]; then
+  fail "$doc has $row_count checksum rows for $binary_count committed binaries"
 fi
+while IFS= read -r bin; do
+  [ -n "$bin" ] || continue
+  name=${bin#_book/}
+  n=$(printf '%s\n' "$rows" | grep -c -F "(../$name)")
+  if [ "$n" -ne 1 ]; then
+    fail "$name: $n checksum rows in $doc, expected 1"
+  fi
+done <<< "$binaries"
 
 authored_pairs=""
 authored_hashes=""
@@ -59,9 +70,9 @@ while IFS= read -r row; do
   [ -n "$row" ] || continue
   name=$(printf '%s\n' "$row" | sed -E 's/^\| \[[^]]+\]\(\.\.\/([^)]+)\).*/\1/')
   size=$(printf '%s\n' "$row" | cut -d'|' -f3 | tr -d ' ')
-  hash=$(printf '%s\n' "$row" | grep -oE '`[0-9a-f]{64}`' | tr -d '`')
+  hash=$(printf '%s\n' "$row" | grep -oE '`[0-9A-Fa-f]{64}`' | tr -d '`' | tr 'A-F' 'a-f')
   if [ -z "$hash" ]; then
-    fail "$name: no 64-character lowercase SHA-256 in its row"
+    fail "$name: no 64-character SHA-256 in its row"
     continue
   fi
   if ! git cat-file -e "HEAD:_book/$name" 2>/dev/null; then
@@ -83,14 +94,14 @@ while IFS= read -r row; do
     fail "$name: table size $size, committed blob $committed_size bytes"
   fi
   for f in "$doc" "$page" "$index"; do
-    n=$(git show "HEAD:$f" | grep -o -F "$hash" | wc -l)
+    n=$(git show "HEAD:$f" | grep -o -i -F "$hash" | wc -l)
     if [ "$n" -ne 1 ]; then
       fail "$name: hash appears $n times in $f (expected 1)"
     fi
   done
   for f in "$page" "$index"; do
     text=$(git show "HEAD:$f" | sed 's/<[^>]*>/ /g' | tr -s '[:space:]' ' ')
-    if ! grep -q -F "$size $hash" <<< "$text"; then
+    if ! grep -q -i -F "$size $hash" <<< "$text"; then
       fail "$name: $f does not give size $size next to hash"
     fi
   done
