@@ -5,8 +5,8 @@
 #    byte size of the committed binary (HEAD:<file>), so the page cannot drift
 #    from the published file.
 # 2. Each checksum is written once in VERIFY.md, the authored source, and once
-#    in each generated copy (VERIFY.html and the search index). No other
-#    committed file may contain it.
+#    in each generated copy (VERIFY.html and the search index), and each copy
+#    gives the same size next to it. No other committed file may contain it.
 #
 # Run from the repository root after committing the binaries.
 # Usage: scripts/check-download-hashes.sh
@@ -59,6 +59,12 @@ while IFS= read -r row; do
     n=$(git show "HEAD:$f" | grep -o -F "$hash" | wc -l)
     if [ "$n" -ne 1 ]; then
       fail "$name: hash appears $n times in $f (expected 1)"
+    fi
+  done
+  for f in "$page" "$index"; do
+    text=$(git show "HEAD:$f" | sed 's/<[^>]*>/ /g' | tr -s '[:space:]' ' ')
+    if ! grep -q -F "$size $hash" <<< "$text"; then
+      fail "$name: $f does not give size $size next to hash"
     fi
   done
   while IFS= read -r f; do
