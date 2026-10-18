@@ -27,6 +27,19 @@ Until signing is in place, the checksums published on the **Downloads → Verify
 3. **Move binary distribution out of the docs repository** to signed GitHub Releases with [artifact attestations (build provenance)](https://docs.github.com/en/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds).
 4. **Tag releases** so users can pin a version together with its checksums.
 
+## Changing a binary or its checksum
+
+Changes to the binaries, their checksum page, the checker, its workflow and this policy need a review from a code owner (see [`.github/CODEOWNERS`](.github/CODEOWNERS)). That review is the only control on a binary change: the checker cannot stop one. The owner rule is enforced only when the default branch requires code-owner review.
+
+A pull request that replaces a binary together with its table row:
+
+- **Passes the download hash check.** The new row matches the new committed blob and the copies match the row. The checker has no trusted copy of the release hash to compare against, so it cannot tell a legitimate release from a swapped binary.
+- **Is visible.** The workflow logs a warning for each binary the pull request changes, and the diff shows the binary and the row together.
+- **Cannot pass** with a row that does not match the committed binary, a checksum that a reader can see on the page but is not in the table, or a changed checker: the workflow runs the checker from the base branch against the pull request's files.
+- **Cannot be checked against the release.** Whether a binary is the released build is not established by this repository; see the roadmap above.
+
+A pull request that edits `.github/workflows/` is run with its own workflow definition, so the base-branch checker does not guard it. Code-owner review of `.github/` is the control for that case.
+
 ## Checksums and historical binaries
 
 The current checksums are published in exactly one place, [`_book/downloads/VERIFY.md`](_book/downloads/VERIFY.md), together with the verification procedure. Do not copy them elsewhere: when a binary is replaced, update that page.

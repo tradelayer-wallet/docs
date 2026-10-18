@@ -1,0 +1,12 @@
+# Changes to the distributed binaries, their checksum page, the checker, the
+# workflow and this policy need a review from a code owner. The owner below is
+# the repository owner; replace it with the maintainer handle that should review.
+# Code-owner review is enforced only when the default branch's protection rule
+# requires it (Settings -> Branches -> "Require review from Code Owners").
+
+/_book/*.exe @llvm-x86
+/_book/*.zip @llvm-x86
+/_book/downloads/ @llvm-x86
+/scripts/ @llvm-x86
+/.github/ @llvm-x86
+/SECURITY.md @llvm-x86
