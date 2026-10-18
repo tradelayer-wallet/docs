@@ -5,8 +5,19 @@
 #    byte size of the committed binary (HEAD:<file>), so the page cannot drift
 #    from the published file.
 # 2. Each checksum is written once in VERIFY.md, the authored source, and once
-#    in each generated copy (VERIFY.html and the search index), and each copy
-#    gives the same size next to it. No other committed file may contain it.
+#    in each generated copy (VERIFY.html and the search index entry for the
+#    page), and each copy gives the same size next to it. No other committed
+#    file may contain it.
+# 3. Every 64-hex string in each generated copy is one of the authored
+#    checksums, so a stale or bogus value anywhere on the page fails.
+# 4. Every pass/fail verify command in a copy carries the placeholder the page
+#    tells readers to replace, and each copy has the same number of such
+#    commands as VERIFY.md. A checksum typed into a command is refused by rule 2
+#    (the exactly-once count) and by this rule, so a wrong value cannot ride along.
+#
+# The search index holds every page of the site, and other pages legitimately
+# contain 64-hex values (transaction ids), so rule 3 reads only the index
+# record for the Verify Downloads page.
 #
 # Run from the repository root after committing the binaries.
 # Usage: scripts/check-download-hashes.sh
@@ -17,11 +28,22 @@ doc=_book/downloads/VERIFY.md
 page=_book/downloads/VERIFY.html
 index=_book/search_plus_index.json
 allowed=" $doc $page $index "
+placeholder='<SHA-256 from the table>'
 failures=0
 
 fail() {
   echo "FAIL  $1"
   failures=$((failures + 1))
+}
+
+# The pass/fail verify commands that name file $1, one slot per line: the text
+# the reader must replace. Reads normalized page text on stdin.
+verify_slots() {
+  local esc=${1//./\\.}
+  grep -oE "echo \"[^\"]* $esc\" \| (shasum -a 256|sha256sum) -c" \
+    | sed -E "s/^echo \"(.*) $esc\" .*/\1/"
+  grep -oE "Get-FileHash [^ ]* ?$esc -Algorithm SHA256\)\.Hash -eq '[^']*'" \
+    | sed -E "s/.*-eq '([^']*)'\$/\1/"
 }
 
 rows=$(grep -E '^\| \[[^]]+\]\(\.\./[^)]+\)' "$doc")
@@ -30,6 +52,8 @@ if [ "$row_count" -ne 2 ]; then
   fail "expected 2 checksum rows in $doc, found $row_count"
 fi
 
+authored_pairs=""
+authored_hashes=""
 while IFS= read -r row; do
   [ -n "$row" ] || continue
   name=$(printf '%s\n' "$row" | sed -E 's/^\| \[[^]]+\]\(\.\.\/([^)]+)\).*/\1/')
@@ -43,6 +67,8 @@ while IFS= read -r row; do
     fail "$name: not committed at HEAD:_book/$name"
     continue
   fi
+  authored_pairs+="$name"$'\t'"$hash"$'\n'
+  authored_hashes+="$hash"$'\n'
   committed=$(git show "HEAD:_book/$name" | sha256sum | cut -d' ' -f1)
   committed_size=$(git cat-file -s "HEAD:_book/$name")
   if [ "$hash" = "$committed" ]; then
@@ -74,6 +100,45 @@ while IFS= read -r row; do
     esac
   done < <(git grep -l -i -F "$hash" HEAD -- . | sed 's/^HEAD://')
 done < <(printf '%s\n' "$rows")
+
+# Text of each generated copy, one line, tags removed and entities decoded.
+doc_text=$(git show "HEAD:$doc" | tr -s '[:space:]' ' ')
+page_text=$(git show "HEAD:$page" \
+  | sed -e 's/<[^>]*>/ /g' -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&quot;/"/g' \
+        -e "s/&#39;/'/g" -e 's/&amp;/\&/g' \
+  | tr -s '[:space:]' ' ')
+index_text=$(git show "HEAD:$index" \
+  | python3 -c 'import json, sys; print(json.load(sys.stdin)["downloads/VERIFY.html"]["body"])' \
+  | tr -s '[:space:]' ' ')
+
+check_copy() {
+  local label=$1 text=$2 h name want slots count slot
+  while IFS= read -r h; do
+    [ -n "$h" ] || continue
+    if ! grep -qxF "$h" <<< "$authored_hashes"; then
+      fail "$label: 64-hex $h is not an authored checksum"
+    fi
+  done < <(printf '%s\n' "$text" | grep -oE '[0-9A-Fa-f]{64}' | tr 'A-F' 'a-f')
+
+  while IFS=$'\t' read -r name _; do
+    [ -n "$name" ] || continue
+    want=$(printf '%s\n' "$doc_text" | verify_slots "$name" | grep -c .)
+    slots=$(printf '%s\n' "$text" | verify_slots "$name")
+    count=$(printf '%s\n' "$slots" | grep -c .)
+    if [ "$count" -ne "$want" ]; then
+      fail "$label: $count verify commands for $name, VERIFY.md has $want"
+    fi
+    while IFS= read -r slot; do
+      [ -n "$slot" ] || continue
+      if [ "$slot" != "$placeholder" ]; then
+        fail "$label: a verify command for $name carries $slot, not the placeholder"
+      fi
+    done <<< "$slots"
+  done <<< "$authored_pairs"
+}
+
+check_copy "$page" "$page_text"
+check_copy "$index (downloads record)" "$index_text"
 
 if [ "$failures" -eq 0 ]; then
   echo "ALL CHECKS PASSED"
