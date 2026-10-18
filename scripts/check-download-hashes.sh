@@ -8,8 +8,9 @@
 #    in each generated copy (VERIFY.html and the search index entry for the
 #    page), and each copy gives the same size next to it. No other committed
 #    file may contain it.
-# 3. Every 64-hex string in each generated copy is one of the authored
-#    checksums, so a stale or bogus value anywhere on the page fails.
+# 3. Every 64-hex string a reader can see in each generated copy is one of the
+#    authored checksums, so a stale or bogus value anywhere on the page fails.
+#    The copies are read as rendered text (see render_html), not as raw bytes.
 # 4. Every pass/fail verify command in a copy carries the placeholder the page
 #    tells readers to replace, and each copy has the same number of such
 #    commands as VERIFY.md. A checksum typed into a command is refused by rule 2
@@ -101,24 +102,63 @@ while IFS= read -r row; do
   done < <(git grep -l -i -F "$hash" HEAD -- . | sed 's/^HEAD://')
 done < <(printf '%s\n' "$rows")
 
-# Text of each generated copy, one line, tags removed and entities decoded.
+# Rendered text of an HTML document on stdin, one line per block: entities are
+# decoded, tags are removed, and inline tags (span, code, ...) join the text on
+# either side of them, so a value split across them is seen whole. Any other
+# tag starts a new line, as a browser does for a block. Attribute values are
+# listed after the text as lines of their own. Comments are not rendered.
+render_html() {
+  python3 -I -c '
+import html.parser, sys
+
+INLINE = {"a", "abbr", "b", "bdi", "bdo", "cite", "code", "data", "dfn", "em",
+          "font", "i", "kbd", "mark", "q", "s", "samp", "small", "span", "strike",
+          "strong", "sub", "sup", "time", "tt", "u", "var"}
+
+class Render(html.parser.HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.lines = [""]
+        self.attributes = []
+
+    def handle_starttag(self, tag, attrs):
+        self.attributes += [value for _, value in attrs if value]
+        if tag not in INLINE:
+            self.lines.append("")
+
+    def handle_endtag(self, tag):
+        if tag not in INLINE:
+            self.lines.append("")
+
+    def handle_data(self, data):
+        self.lines[-1] += data
+
+parser = Render()
+parser.feed(sys.stdin.buffer.read().decode("utf-8", "replace"))
+parser.close()
+text = "\n".join(" ".join(line.split()) for line in parser.lines + parser.attributes) + "\n"
+sys.stdout.buffer.write(text.encode("utf-8"))
+'
+}
+
+# Text of each generated copy. The page is HTML, so it is read rendered. The
+# index body is plain text, so it is also read raw, where a placeholder such as
+# <SHA-256 from the table> is still visible.
 doc_text=$(git show "HEAD:$doc" | tr -s '[:space:]' ' ')
-page_text=$(git show "HEAD:$page" \
-  | sed -e 's/<[^>]*>/ /g' -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&quot;/"/g' \
-        -e "s/&#39;/'/g" -e 's/&amp;/\&/g' \
-  | tr -s '[:space:]' ' ')
-index_text=$(git show "HEAD:$index" \
-  | python3 -c 'import json, sys; print(json.load(sys.stdin)["downloads/VERIFY.html"]["body"])' \
-  | tr -s '[:space:]' ' ')
+page_text=$(git show "HEAD:$page" | render_html)
+index_body=$(git show "HEAD:$index" \
+  | python3 -I -c 'import json, sys; print(json.load(sys.stdin)["downloads/VERIFY.html"]["body"])')
+index_text=$(printf '%s\n' "$index_body" | tr -s '[:space:]' ' ')
+index_hex_text=$(printf '%s\n%s\n' "$(printf '%s\n' "$index_body" | render_html)" "$index_text")
 
 check_copy() {
-  local label=$1 text=$2 h name want slots count slot
+  local label=$1 hex_text=$2 text=$3 h name want slots count slot
   while IFS= read -r h; do
     [ -n "$h" ] || continue
     if ! grep -qxF "$h" <<< "$authored_hashes"; then
       fail "$label: 64-hex $h is not an authored checksum"
     fi
-  done < <(printf '%s\n' "$text" | grep -oE '[0-9A-Fa-f]{64}' | tr 'A-F' 'a-f')
+  done < <(printf '%s\n' "$hex_text" | grep -oE '[0-9A-Fa-f]{64,}' | tr 'A-F' 'a-f')
 
   while IFS=$'\t' read -r name _; do
     [ -n "$name" ] || continue
@@ -137,8 +177,8 @@ check_copy() {
   done <<< "$authored_pairs"
 }
 
-check_copy "$page" "$page_text"
-check_copy "$index (downloads record)" "$index_text"
+check_copy "$page" "$page_text" "$page_text"
+check_copy "$index (downloads record)" "$index_hex_text" "$index_text"
 
 if [ "$failures" -eq 0 ]; then
   echo "ALL CHECKS PASSED"
