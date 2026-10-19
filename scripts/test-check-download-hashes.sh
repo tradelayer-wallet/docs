@@ -209,6 +209,15 @@ run_case bogus-grouped-in-index fail \
 run_case bogus-numeric-entities-in-index fail \
   "$(index_edit "$bogus_entities")"
 
+run_case bogus-verify-cmd-grouped-check fail \
+  "$(page_edit "<pre>echo \"$grouped_spaces  TL-Extension.zip\" | sha256sum --check</pre>")"
+
+run_case bogus-verify-cmd-short-hash-check fail \
+  "$(page_edit '<pre>echo "0123abcd  TL-Extension.zip" | sha256sum --check</pre>')"
+
+run_case extra-verify-command-without-check fail \
+  "$(page_edit '<pre>sha256sum TL-Extension.zip</pre>')"
+
 if [ "$failures" -eq 0 ]; then
   echo "ALL TESTS PASSED"
   exit 0

@@ -19,10 +19,10 @@
 #    with no separators, each authored checksum is masked, and white space,
 #    dashes and colons are dropped. A value split across tags, grouped, or
 #    written with invisible characters is then seen whole.
-# 4. Every pass/fail verify command in a copy carries the placeholder the page
-#    tells readers to replace, and each copy has the same number of such
-#    commands as VERIFY.md. A checksum typed into a command is refused by rule 2
-#    (the exactly-once count) and by this rule, so a wrong value cannot ride along.
+# 4. Every command in a copy that runs sha256sum, shasum, certutil or
+#    Get-FileHash appears as often as in VERIFY.md, and every pass/fail command
+#    carries the placeholder the page tells readers to replace. A checksum typed
+#    into a command is refused by rule 2 and by rule 3.
 #
 # The search index holds every page of the site, and other pages legitimately
 # contain 64-hex values (transaction ids), so rules 3 and 4 read only the index
@@ -57,6 +57,11 @@ for slot in re.findall(r"echo \"([^\"]*) " + name + r"\" \| (?:shasum -a 256|sha
 for slot in re.findall(r"Get-FileHash [^ ]* ?" + name + r" -Algorithm SHA256\)\.Hash -eq \x27([^\x27]*)\x27", text):
     print(slot)
 ' "$1"
+}
+
+# The number of commands that run a checksum tool, on stdin.
+command_count() {
+  grep -o -i -E 'sha256sum|shasum|certutil|Get-FileHash' | grep -c .
 }
 
 # Runs of 64 or more hex digits that a reader can see in a copy, one line per run
@@ -220,22 +225,30 @@ sys.stdout.buffer.write(text.encode("utf-8"))
 # is plain text, so its slots are read raw, where a placeholder such as
 # <SHA-256 from the table> is still visible.
 doc_text=$(git show "HEAD:$doc" | tr -s '[:space:]' ' ')
+doc_commands=$(git show "HEAD:$doc" | command_count)
 page_raw=$(git show "HEAD:$page")
 page_text=$(printf '%s\n' "$page_raw" | render_html)
 index_body=$(git show "HEAD:$index" \
   | python3 -I -c 'import json, sys; print(json.load(sys.stdin)["downloads/VERIFY.html"]["body"])')
 index_text=$(printf '%s\n' "$index_body" | tr -s '[:space:]' ' ')
+index_rendered=$(printf '%s\n' "$index_body" | render_html)
 
 # check_copy LABEL RAW TEXT RENDERED: RAW is the copy as written, TEXT is the
 # normalized text that the verify commands are read from, RENDERED is the
 # copy as a reader sees it.
 check_copy() {
-  local label=$1 raw=$2 text=$3 mode name want slots count run
+  local label=$1 raw=$2 text=$3 rendered=$4 mode name want slots count run
   for mode in raw html; do
     while IFS= read -r run; do
       [ -n "$run" ] || continue
       fail "$label: a run of $run hex digits ($mode text) is not an authored checksum"
     done < <(printf '%s\n' "$raw" | hex_runs "$mode")
+  done
+
+  for count in $(printf '%s\n' "$raw" | command_count) $(printf '%s\n' "$rendered" | command_count); do
+    if [ "$count" -ne "$doc_commands" ]; then
+      fail "$label: $count checksum commands, VERIFY.md has $doc_commands"
+    fi
   done
 
   while IFS=$'\t' read -r name _; do
@@ -255,8 +268,8 @@ check_copy() {
   done <<< "$authored_pairs"
 }
 
-check_copy "$page" "$page_raw" "$page_text"
-check_copy "$index (downloads record)" "$index_body" "$index_text"
+check_copy "$page" "$page_raw" "$page_text" "$page_text"
+check_copy "$index (downloads record)" "$index_body" "$index_text" "$index_rendered"
 
 if [ "$failures" -eq 0 ]; then
   echo "ALL CHECKS PASSED"
