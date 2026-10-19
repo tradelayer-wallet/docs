@@ -11,16 +11,21 @@
 #    in each generated copy (VERIFY.html and the search index entry for the
 #    page), and each copy gives the same size next to it. No other committed
 #    file may contain it.
-# 3. Every 64-hex string a reader can see in each generated copy is one of the
-#    authored checksums, so a stale or bogus value anywhere on the page fails.
-#    The copies are read as rendered text (see render_html), not as raw bytes.
+# 3. No copy shows a run of 64 or more hex digits that is not an authored
+#    checksum. Each copy is read two ways: as raw text, and as parsed HTML, where
+#    every text node, CDATA section, comment, script and style body, and
+#    attribute value counts. Each text is normalized (NFKC, digits to ASCII, and
+#    format, control and combining characters dropped), the pieces are joined
+#    with no separators, each authored checksum is masked, and white space,
+#    dashes and colons are dropped. A value split across tags, grouped, or
+#    written with invisible characters is then seen whole.
 # 4. Every pass/fail verify command in a copy carries the placeholder the page
 #    tells readers to replace, and each copy has the same number of such
 #    commands as VERIFY.md. A checksum typed into a command is refused by rule 2
 #    (the exactly-once count) and by this rule, so a wrong value cannot ride along.
 #
 # The search index holds every page of the site, and other pages legitimately
-# contain 64-hex values (transaction ids), so rule 3 reads only the index
+# contain 64-hex values (transaction ids), so rules 3 and 4 read only the index
 # record for the Verify Downloads page.
 #
 # Run from the repository root after committing the binaries.
@@ -40,8 +45,8 @@ fail() {
   failures=$((failures + 1))
 }
 
-# The pass/fail verify commands that name file $1, one slot per line: the text
-# the reader must replace. Reads normalized page text on stdin.
+# The pass/fail verify commands that name file $1, one per line: the text the
+# reader must replace. Reads normalized text on stdin.
 verify_slots() {
   python3 -I -c '
 import re, sys
@@ -54,12 +59,65 @@ for slot in re.findall(r"Get-FileHash [^ ]* ?" + name + r" -Algorithm SHA256\)\.
 ' "$1"
 }
 
+# Runs of 64 or more hex digits that a reader can see in a copy, one line per run
+# with its length. Reads the copy's raw text on stdin. Argument 1 is raw or html;
+# the authored checksums are masked, so they are never reported.
+hex_runs() {
+  python3 -I -c '
+import html.parser, re, sys, unicodedata
+
+class Pieces(html.parser.HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.pieces = []
+
+    def handle_starttag(self, tag, attrs):
+        self.pieces += [value for _, value in attrs if value]
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+
+    def handle_data(self, data):
+        self.pieces.append(data)
+
+    handle_comment = handle_decl = handle_pi = handle_unknown_decl = handle_data
+
+def visible(text):
+    kept = []
+    for c in unicodedata.normalize("NFKC", text):
+        category = unicodedata.category(c)
+        if category == "Nd":
+            kept.append(str(unicodedata.decimal(c)))
+        elif category in ("Cc", "Cf", "Mn", "Me") and not c.isspace():
+            continue
+        else:
+            kept.append(c)
+    return "".join(kept)
+
+mode, authored = sys.argv[1], sys.argv[2].split()
+raw = sys.stdin.buffer.read().decode("utf-8", "replace")
+if mode == "html":
+    parser = Pieces()
+    parser.feed(raw)
+    parser.close()
+    pieces = parser.pieces
+else:
+    pieces = [raw]
+text = "".join(visible(piece) for piece in pieces).lower()
+for value in authored:
+    text = text.replace(value, "@")
+text = "".join(c for c in text if not (c.isspace() or c == ":" or unicodedata.category(c) == "Pd"))
+for run in re.findall(r"[0-9a-f]{64,}", text):
+    print(len(run))
+' "$1" "$authored_hashes"
+}
+
 binaries=$({ git ls-tree -r --name-only HEAD _book/; find _book -type f; } | grep -i -E '\.(exe|zip)$' | sort -u)
 rows=$(grep -E '^\| \[[^]]+\]\(\.\./[^)]+\)' "$doc")
 row_count=$(printf '%s\n' "$rows" | grep -c .)
 binary_count=$(printf '%s\n' "$binaries" | grep -c .)
 if [ "$row_count" -ne "$binary_count" ]; then
-  fail "$doc has $row_count checksum rows for $binary_count committed binaries"
+  fail "$doc has $row_count checksum rows for $binary_count binaries"
 fi
 while IFS= read -r bin; do
   [ -n "$bin" ] || continue
@@ -158,24 +216,27 @@ sys.stdout.buffer.write(text.encode("utf-8"))
 '
 }
 
-# Text of each generated copy. The page is HTML, so it is read rendered. The
-# index body is plain text, so it is also read raw, where a placeholder such as
+# Raw and rendered text of each generated copy. The page is HTML. The index body
+# is plain text, so its slots are read raw, where a placeholder such as
 # <SHA-256 from the table> is still visible.
 doc_text=$(git show "HEAD:$doc" | tr -s '[:space:]' ' ')
-page_text=$(git show "HEAD:$page" | render_html)
+page_raw=$(git show "HEAD:$page")
+page_text=$(printf '%s\n' "$page_raw" | render_html)
 index_body=$(git show "HEAD:$index" \
   | python3 -I -c 'import json, sys; print(json.load(sys.stdin)["downloads/VERIFY.html"]["body"])')
 index_text=$(printf '%s\n' "$index_body" | tr -s '[:space:]' ' ')
-index_hex_text=$(printf '%s\n%s\n' "$(printf '%s\n' "$index_body" | render_html)" "$index_text")
 
+# check_copy LABEL RAW TEXT RENDERED: RAW is the copy as written, TEXT is the
+# normalized text that the verify commands are read from, RENDERED is the
+# copy as a reader sees it.
 check_copy() {
-  local label=$1 hex_text=$2 text=$3 h name want slots count slot
-  while IFS= read -r h; do
-    [ -n "$h" ] || continue
-    if ! grep -qxF "$h" <<< "$authored_hashes"; then
-      fail "$label: 64-hex $h is not an authored checksum"
-    fi
-  done < <(printf '%s\n' "$hex_text" | grep -oE '[0-9A-Fa-f]{64,}' | tr 'A-F' 'a-f')
+  local label=$1 raw=$2 text=$3 mode name want slots count run
+  for mode in raw html; do
+    while IFS= read -r run; do
+      [ -n "$run" ] || continue
+      fail "$label: a run of $run hex digits ($mode text) is not an authored checksum"
+    done < <(printf '%s\n' "$raw" | hex_runs "$mode")
+  done
 
   while IFS=$'\t' read -r name _; do
     [ -n "$name" ] || continue
@@ -194,8 +255,8 @@ check_copy() {
   done <<< "$authored_pairs"
 }
 
-check_copy "$page" "$page_text" "$page_text"
-check_copy "$index (downloads record)" "$index_hex_text" "$index_text"
+check_copy "$page" "$page_raw" "$page_text"
+check_copy "$index (downloads record)" "$index_body" "$index_text"
 
 if [ "$failures" -eq 0 ]; then
   echo "ALL CHECKS PASSED"

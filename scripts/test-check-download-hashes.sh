@@ -18,11 +18,19 @@ trap 'rm -rf "$tmp"' EXIT
 bogus=$(printf 'f0%.0s' $(seq 32))
 bogus_entities=$(python3 -I -c 'import sys; print("".join("&#%d;" % ord(c) for c in sys.argv[1]))' "$bogus")
 bogus_split="<span>${bogus:0:32}</span><span>${bogus:32}</span>"
-bogus_regroup() {
+zwsp=$(printf '\342\200\213')
+bogus_zwsp="${bogus:0:20}${zwsp}${bogus:20}"
+bogus_fullwidth=$(python3 -I -c 'import sys
+print("".join(chr(0xFF10 + int(c)) if c.isdigit() else chr(0xFF21 + ord(c) - ord("A") if c.isupper() else 0xFF21 + ord(c) - ord("a")) for c in sys.argv[1]))' "$bogus")
+bogus_arabic=$(printf '\331\240%.0s' $(seq 64))
+regroup() {
   python3 -I -c 'import sys
 s, n, sep = sys.argv[1], int(sys.argv[2]), sys.argv[3]
 print(sep.join(s[i:i + n] for i in range(0, len(s), n)))' "$1" "$2" "$3"
 }
+grouped_spaces=$(regroup "$bogus" 4 ' ')
+grouped_dashes=$(regroup "$bogus" 2 '-')
+grouped_colons=$(regroup "$bogus" 8 ':')
 
 failures=0
 
@@ -135,6 +143,9 @@ run_case honest-nested-download pass 'add_download downloads/extra.exe'
 
 run_case honest-uppercase-extension pass 'add_download Extra.EXE'
 
+run_case honest-table-cells pass \
+  "$(page_edit '<table><tr><td>92879604</td><td>Windows installer</td></tr></table>')"
+
 run_case download-without-row fail \
   "printf 'extra build\\n' > _book/Extra.zip"
 
@@ -153,11 +164,47 @@ run_case bogus-split-across-tags fail \
 run_case bogus-split-across-inline-tags fail \
   "$(page_edit "<p><code>${bogus:0:20}</code><em>${bogus:20:24}</em><span>${bogus:44}</span></p>")"
 
+run_case bogus-split-across-table-cells fail \
+  "$(page_edit "<table><tr><td>92879604</td><td><code>${bogus:0:63}</code></td></tr></table>")"
+
 run_case bogus-in-attribute fail \
   "$(page_edit "<p data-ref=\"$bogus\">note</p>")"
 
 run_case bogus-entities-in-attribute fail \
   "$(page_edit "<a title=\"$bogus_entities\">note</a>")"
+
+run_case bogus-in-comment fail \
+  "$(page_edit "<!-- $bogus -->")"
+
+run_case bogus-in-cdata fail \
+  "$(page_edit "<svg xmlns=\"http://www.w3.org/2000/svg\"><text><![CDATA[$bogus]]></text></svg>")"
+
+run_case bogus-in-style fail \
+  "$(page_edit "<style>.x::after{content:\"$bogus\"}</style>")"
+
+run_case bogus-in-script fail \
+  "$(page_edit "<script>var h='$bogus';</script>")"
+
+run_case bogus-zero-width-space fail \
+  "$(page_edit "<p>$bogus_zwsp</p>")"
+
+run_case bogus-fullwidth-digits fail \
+  "$(page_edit "<p>$bogus_fullwidth</p>")"
+
+run_case bogus-arabic-indic-digits fail \
+  "$(page_edit "<p>$bogus_arabic</p>")"
+
+run_case bogus-grouped-spaces fail \
+  "$(page_edit "<p>$grouped_spaces</p>")"
+
+run_case bogus-grouped-dashes fail \
+  "$(page_edit "<p>$grouped_dashes</p>")"
+
+run_case bogus-grouped-colons fail \
+  "$(page_edit "<p>$grouped_colons</p>")"
+
+run_case bogus-grouped-in-index fail \
+  "$(index_edit "$grouped_spaces")"
 
 run_case bogus-numeric-entities-in-index fail \
   "$(index_edit "$bogus_entities")"
