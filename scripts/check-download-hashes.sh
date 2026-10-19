@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Checks the download checksums on the Verify Downloads page.
 #
-# 1. Each committed binary in _book (.exe and .zip) has exactly one checksum row
-#    in _book/downloads/VERIFY.md, and each row equals the SHA-256 and the byte
-#    size of the committed binary (HEAD:<file>), so the page cannot drift from
-#    the published file. Hex case does not matter.
+# 1. Each binary in _book (.exe and .zip, in any folder and in any letter case)
+#    has exactly one checksum row in _book/downloads/VERIFY.md, and each row
+#    equals the SHA-256 and the byte size of the committed binary (HEAD:<file>),
+#    so the page cannot drift from the published file. Hex case does not matter.
+#    Binaries are listed from the commit and from the working tree, so a binary
+#    that is not committed fails here too.
 # 2. Each checksum is written once in VERIFY.md, the authored source, and once
 #    in each generated copy (VERIFY.html and the search index entry for the
 #    page), and each copy gives the same size next to it. No other committed
@@ -41,14 +43,18 @@ fail() {
 # The pass/fail verify commands that name file $1, one slot per line: the text
 # the reader must replace. Reads normalized page text on stdin.
 verify_slots() {
-  local esc=${1//./\\.}
-  grep -oE "echo \"[^\"]* $esc\" \| (shasum -a 256|sha256sum) -c" \
-    | sed -E "s/^echo \"(.*) $esc\" .*/\1/"
-  grep -oE "Get-FileHash [^ ]* ?$esc -Algorithm SHA256\)\.Hash -eq '[^']*'" \
-    | sed -E "s/.*-eq '([^']*)'\$/\1/"
+  python3 -I -c '
+import re, sys
+name = re.escape(sys.argv[1])
+text = sys.stdin.read()
+for slot in re.findall(r"echo \"([^\"]*) " + name + r"\" \| (?:shasum -a 256|sha256sum) -c", text):
+    print(slot)
+for slot in re.findall(r"Get-FileHash [^ ]* ?" + name + r" -Algorithm SHA256\)\.Hash -eq \x27([^\x27]*)\x27", text):
+    print(slot)
+' "$1"
 }
 
-binaries=$(git ls-tree --name-only HEAD _book/ | grep -E '\.(exe|zip)$')
+binaries=$({ git ls-tree -r --name-only HEAD _book/; find _book -type f; } | grep -i -E '\.(exe|zip)$' | sort -u)
 rows=$(grep -E '^\| \[[^]]+\]\(\.\./[^)]+\)' "$doc")
 row_count=$(printf '%s\n' "$rows" | grep -c .)
 binary_count=$(printf '%s\n' "$binaries" | grep -c .)
