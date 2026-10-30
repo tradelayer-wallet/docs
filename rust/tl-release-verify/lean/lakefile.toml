@@ -1,0 +1,5 @@
+name = "tl_release_verify"
+defaultTargets = ["TlReleaseVerify"]
+
+[[lean_lib]]
+name = "TlReleaseVerify"
