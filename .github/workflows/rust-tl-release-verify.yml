@@ -2,6 +2,9 @@ name: Release verification
 on:
   pull_request:
     paths: ['rust/tl-release-verify/**', '_book/RELEASES.sha256', '_book/*.exe', '_book/*.zip', '.github/workflows/rust-tl-release-verify.yml']
+  push:
+    branches: [feat/rust-port]
+    paths: ['rust/tl-release-verify/**', '_book/RELEASES.sha256', '_book/*.exe', '_book/*.zip', '.github/workflows/rust-tl-release-verify.yml']
   workflow_dispatch:
 permissions:
   contents: read
